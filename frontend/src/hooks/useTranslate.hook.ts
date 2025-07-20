@@ -19,10 +19,12 @@ export const translateOutsideContext = () => {
   const locale =
     getCookie("language")?.toString() ?? navigator.language.split("-")[0];
 
+  // fall back to english if key does not exist
+  const englishMessages = i18nUtil.getLocaleByCode("en-US")?.messages;
   const intl = createIntl(
     {
       locale,
-      messages: i18nUtil.getLocaleByCode(locale)?.messages,
+      messages: {...englishMessages, ...i18nUtil.getLocaleByCode(locale)?.messages},
       defaultLocale: "en",
     },
     cache,
