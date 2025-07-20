@@ -112,7 +112,7 @@ export class ConfigService extends EventEmitter {
   async getByCategory(category: string) {
     const configVariables = this.configVariables
       .filter((c) => !c.locked && category == c.category)
-      .sort((c) => c.order);
+      .sort((c1, c2) => c1.order - c2.order);
 
     return configVariables.map((variable) => {
       return {
