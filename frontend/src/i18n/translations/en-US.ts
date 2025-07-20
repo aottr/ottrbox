@@ -464,30 +464,35 @@ export default {
     "Enable email recipient sharing",
   "admin.config.email.enable-share-email-recipients.description":
     "Whether to allow email sharing with recipients. Only enable this if SMTP is activated.",
+  "admin.config.email.reply-to-email": "Reply to email",
+  "admin.config.email.reply-to-email.description":
+    "(Optional) The email address which should be used as the reply-to address for emails sent. If not set, the default email address will be used.",
+  "admin.config.email.share-sender-name": "Share sender name",
+  "admin.config.email.share-sender-name.description": "(Optional) Setting this will override the default sender name. The application name will be used if this is not set.",
   "admin.config.email.share-recipients-subject": "Share recipients subject",
   "admin.config.email.share-recipients-subject.description":
     "Subject of the email which gets sent to the share recipients.",
   "admin.config.email.share-recipients-message": "Share recipients message",
   "admin.config.email.share-recipients-message.description":
-    "Message which gets sent to the share recipients. Available variables:\n {creator} - The username of the creator of the share\n {creatorEmail} - The email of the creator of the share\n {shareUrl} - The URL of the share\n {desc} - The description of the share\n {expires} - The expiration date of the share\n These variables will be replaced with the actual value.",
+    "Message which gets sent to the share recipients. Available variables:\n '{creator'} - The username of the creator of the share\n '{creatorEmail'} - The email of the creator of the share\n '{shareUrl'} - The URL of the share\n '{desc'} - The description of the share\n '{expires'} - The expiration date of the share\n These variables will be replaced with the actual value.",
   "admin.config.email.reverse-share-subject": "Reverse share subject",
   "admin.config.email.reverse-share-subject.description":
     "Subject of the sent email when someone created a share with your reverse share link.",
   "admin.config.email.reverse-share-message": "Reverse share message",
   "admin.config.email.reverse-share-message.description":
-    "Message which gets sent when someone created a share with your reverse share link. {shareUrl} will be replaced with the creator's name and the share URL.",
+    "Message which gets sent when someone created a share with your reverse share link. '{shareUrl'} will be replaced with the creator's name and the share URL.",
   "admin.config.email.reset-password-subject": "Reset password subject",
   "admin.config.email.reset-password-subject.description":
     "Subject of the sent email when a user requests a password reset.",
   "admin.config.email.reset-password-message": "Reset password message",
   "admin.config.email.reset-password-message.description":
-    "Message which gets sent when a user requests a password reset. {url} will be replaced with the reset password URL.",
+    "Message which gets sent when a user requests a password reset. '{url'} will be replaced with the reset password URL.",
   "admin.config.email.invite-subject": "Invite subject",
   "admin.config.email.invite-subject.description":
     "Subject of the sent email when an admin invites a user.",
   "admin.config.email.invite-message": "Invite message",
   "admin.config.email.invite-message.description":
-    "Message which gets sent when an admin invites a user. {url} will be replaced with the invite URL, {email} with the email and {password} with the users password.",
+    "Message which gets sent when an admin invites a user. '{url'} will be replaced with the invite URL, '{email'} with the email and '{password'} with the users password.",
 
   "admin.config.share.allow-registration": "Allow registration",
   "admin.config.share.allow-registration.description":

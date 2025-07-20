@@ -35,11 +35,16 @@ export class EmailService {
   }
 
   private async sendMail(email: string, subject: string, text: string) {
+    const replyTo = this.config.get("email.replyToEmail")?.trim() || undefined;
+    const senderName = this.config.get("email.senderName")?.trim() || this.config.get(
+      "general.appName",
+    );
     await this.getTransporter()
       .sendMail({
-        from: `"${this.config.get("general.appName")}" <${this.config.get(
+        from: `"${senderName}" <${this.config.get(
           "smtp.email",
         )}>`,
+        replyTo,
         to: email,
         subject,
         text,
