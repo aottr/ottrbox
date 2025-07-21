@@ -1,7 +1,7 @@
-import { Button, Center, createStyles, Group, Text } from "@mantine/core";
+import { createStyles, Group, Text } from "@mantine/core";
 import { Dropzone as MantineDropzone } from "@mantine/dropzone";
 import { ForwardedRef, useRef } from "react";
-import { TbCloudUpload, TbUpload } from "react-icons/tb";
+import { TbCloudUpload } from "react-icons/tb";
 import { FormattedMessage } from "react-intl";
 import useTranslate from "../../hooks/useTranslate.hook";
 import { FileUpload } from "../../types/File.type";
@@ -90,18 +90,6 @@ const Dropzone = ({
           </Text>
         </div>
       </MantineDropzone>
-      <Center>
-        <Button
-          className={classes.control}
-          variant="light"
-          size="sm"
-          radius="xl"
-          disabled={isUploading}
-          onClick={() => openRef.current && openRef.current()}
-        >
-          {<TbUpload />}
-        </Button>
-      </Center>
     </div>
   );
 };
