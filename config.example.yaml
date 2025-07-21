@@ -3,18 +3,18 @@
 
 general:
   #Name of the application
-  appName: Pingvin Share
-  #On which URL Pingvin Share is available
+  appName: OttrBox
+  #On which URL OttrBox is available
   appUrl: http://localhost:3000
   #Whether to set the secure flag on cookies. If enabled, the site will not function when accessed over HTTP.
   secureCookies: "false"
   #Whether to show the home page
-  showHomePage: "true"
+  showHomePage: "false"
   #Time after which a user must log in again (default: 3 months).
   sessionDuration: 3 months
 share:
   #Whether registration is allowed
-  allowRegistration: "true"
+  allowRegistration: "false"
   #Whether unauthenticated users can create shares
   allowUnauthenticatedShares: "false"
   #Maximum share expiration. Set to 0 to allow unlimited expiration.
@@ -30,10 +30,10 @@ share:
   #The share creation modal automatically appears when a user selects files, eliminating the need to manually click the button.
   autoOpenShareModal: "false"
 cache:
-  #Normally Pingvin Share caches information in memory. If you run multiple instances of Pingvin Share, you need to enable Redis caching to share the cache between the instances.
+  #Normally OttrBox caches information in memory. If you run multiple instances of OttrBox, you need to enable Redis caching to share the cache between the instances.
   redis-enabled: "false"
   #Url to connect to the Redis instance used for caching.
-  redis-url: redis://pingvin-redis:6379
+  redis-url: redis://ottrbox-redis:6379
   #Time in second to keep information inside the cache.
   ttl: "60"
   #Maximum number of items inside the cache.
@@ -64,7 +64,7 @@ email:
     Note: {desc}
 
 
-    Shared securely with Pingvin Share 🐧
+    Shared securely with OttrBox 🦦
   #Subject of the sent email when someone created a share with your reverse share link.
   reverseShareSubject: Reverse share link used
   #Message which gets sent when someone created a share with your reverse share link. {shareUrl} will be replaced with the creator's name and the share URL.
@@ -73,9 +73,9 @@ email:
 
     A share was just created with your reverse share link: {shareUrl}
 
-    Shared securely with Pingvin Share 🐧
+    Shared securely with OttrBox 🦦
   #Subject of the sent email when a user requests a password reset.
-  resetPasswordSubject: Pingvin Share password reset
+  resetPasswordSubject: OttrBox password reset
   #Message which gets sent when a user requests a password reset. {url} will be replaced with the reset password URL.
   resetPasswordMessage: >-
     Hey!
@@ -87,22 +87,22 @@ email:
     The link expires in an hour.
 
 
-    Pingvin Share 🐧
+    OttrBox 🦦
   #Subject of the sent email when an admin invites a user.
-  inviteSubject: Pingvin Share invite
+  inviteSubject: OttrBox invite
   #Message which gets sent when an admin invites a user. {url} will be replaced with the invite URL, {email} with the email and {password} with the users password.
   inviteMessage: >-
     Hey!
 
 
-    You were invited to Pingvin Share. Click this link to accept the invite:
+    You were invited to OttrBox. Click this link to accept the invite:
     {url}
 
 
     You can use the email "{email}" and the password "{password}" to sign in.
 
 
-    Pingvin Share 🐧
+    OttrBox 🦦
 smtp:
   #Whether SMTP is enabled. Only set this to true if you entered the host, port, email, user and password of your SMTP server.
   enabled: "false"

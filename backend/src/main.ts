@@ -67,7 +67,7 @@ async function bootstrap() {
   // Setup Swagger in development mode
   if (process.env.NODE_ENV == "development") {
     const config = new DocumentBuilder()
-      .setTitle("Pingvin Share API")
+      .setTitle("OttrBox API")
       .setVersion("1.0")
       .build();
     const document = SwaggerModule.createDocument(app, config);

@@ -21,33 +21,33 @@ const Intro = () => {
             <Logo height={80} width={80} />
           </Center>
           <Center>
-            <Title order={2}>Welcome to Pingvin Share</Title>
+            <Title order={2}>Welcome to OttrBox</Title>
           </Center>
           <Text>
-            If you enjoy Pingvin Share please ⭐️ it on{" "}
+            If you enjoy OttrBox please ⭐️ it on{" "}
             <Anchor
               target="_blank"
-              href="https://github.com/stonith404/pingvin-share"
+              href="https://github.com/aottr/ottrbox"
             >
               GitHub
             </Anchor>{" "}
             or{" "}
             <Anchor
               target="_blank"
-              href="https://github.com/sponsors/stonith404"
+              href="https://github.com/sponsors/aottr"
             >
               buy me a coffee
             </Anchor>{" "}
             if you want to support my work.
           </Text>
-          <Text>Enough talked, have fun with Pingvin Share!</Text>
+          <Text>Enough talked, have fun with OttrBox!</Text>
           <Text mt="lg">How to you want to continue?</Text>
           <Stack>
             <Button href="/admin/config/general" component={Link}>
               Customize configuration
             </Button>
             <Button href="/" component={Link} variant="light">
-              Explore Pingvin Share
+              Explore OttrBox
             </Button>
           </Stack>
         </Stack>
