@@ -1,3 +1,13 @@
+## [1.14.0](https://github.com/aottr/ottrbox/compare/v1.13.0...v1.14.0) (2025-07-20)
+
+### Features
+
+* add sender name and replyTo email settings ([ae49eb3](https://github.com/aottr/ottrbox/commit/ae49eb3ed206ce7268624e95c53c9d48fdbd0706))
+
+### Bug Fixes
+
+* fallback to english for non-existing keys ([04eacf2](https://github.com/aottr/ottrbox/commit/04eacf2f727ec4a187967ddf13a23ad0729610ff))
+* sort config items depending on order value ([78606ea](https://github.com/aottr/ottrbox/commit/78606ea7b9dd11888c764d07c2e82287e9b8672f))
 ## [1.13.0](https://github.com/stonith404/pingvin-share/compare/v1.12.0...v1.13.0) (2025-05-25)
 
 
