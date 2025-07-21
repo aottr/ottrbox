@@ -1,43 +1,43 @@
+# Base node image with common tools installed
+FROM node:22-alpine AS base
+RUN apk add --no-cache curl caddy su-exec openssl
+
 # Stage 1: Frontend dependencies
-FROM node:22-alpine AS frontend-dependencies
+FROM base AS frontend-dependencies
 WORKDIR /opt/app
 COPY frontend/package.json frontend/package-lock.json ./
 RUN npm ci
 
 # Stage 2: Build frontend
-FROM node:22-alpine AS frontend-builder
+FROM base AS frontend-builder
 WORKDIR /opt/app
 COPY ./frontend .
 COPY --from=frontend-dependencies /opt/app/node_modules ./node_modules
+ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
 # Stage 3: Backend dependencies
-FROM node:22-alpine AS backend-dependencies
+FROM base AS backend-dependencies
 RUN apk add --no-cache python3
 WORKDIR /opt/app
 COPY backend/package.json backend/package-lock.json ./
 RUN npm ci
 
 # Stage 4: Build backend
-FROM node:22-alpine AS backend-builder
-RUN apk add openssl
+FROM base AS backend-builder
 
 WORKDIR /opt/app
 COPY ./backend .
 COPY --from=backend-dependencies /opt/app/node_modules ./node_modules
 RUN npx prisma generate
-RUN npm run build && npm prune --production
+RUN npm run build && npm prune --omit=dev
 
 # Stage 5: Final image
-FROM node:22-alpine AS runner
+FROM base AS runner
 ENV NODE_ENV=docker
 
 # Delete default node user
 RUN deluser --remove-home node
-
-RUN apk update --no-cache \
-    && apk upgrade --no-cache \
-    && apk add --no-cache curl caddy su-exec openssl
 
 WORKDIR /opt/app/frontend
 COPY --from=frontend-builder /opt/app/public ./public
@@ -59,7 +59,8 @@ COPY ./scripts/docker ./scripts/docker
 
 EXPOSE 3000
 
-HEALTHCHECK --interval=10s --timeout=3s CMD /bin/sh -c '(if [[ "$CADDY_DISABLED" = "true" ]]; then curl -fs http://localhost:${BACKEND_PORT:-8080}/api/health; else curl -fs http://localhost:3000/api/health; fi) || exit 1'
+HEALTHCHECK --interval=10s --timeout=3s CMD sh -c \
+    '[ "$CADDY_DISABLED" = "true" ] && curl -fs http://localhost:$BACKEND_PORT/api/health || curl -fs http://localhost:3000/api/health || exit 1'
 
 ENTRYPOINT ["sh", "./scripts/docker/create-user.sh"]
 CMD ["sh", "./scripts/docker/entrypoint.sh"]

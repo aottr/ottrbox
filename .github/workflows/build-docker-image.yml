@@ -52,13 +52,10 @@ jobs:
             type=semver,pattern={{major}},prefix=v,enable=${{ github.event_name == 'release' }}
             # manual workflow with custom tag
             type=raw,value=${{ github.event.inputs.tag }},enable=${{ github.event_name == 'workflow_dispatch' && github.event.inputs.tag != '' }}
-            # pushes to main (dev builds)
-            type=raw,value=dev-{{sha}},prefix=,suffix=,enable=${{ github.event_name == 'push' }}
+            # Dev tag for pushes to main
+            type=raw,value=dev-{{sha}},enable=${{ github.event_name == 'push' }}
             # manual workflow without tag (use 'latest')
             type=raw,value=latest,enable=${{ github.event_name == 'workflow_dispatch' && github.event.inputs.tag == '' }}
-            # Common tag: SHA
-            type=sha,format=short
-
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -85,7 +82,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          platforms: linux/amd64,linux/arm64
+          platforms: ${{ github.event_name == 'release' && 'linux/amd64,linux/arm64' || 'linux/amd64' }}
           # Only push if it's a release, manual trigger with push enabled, or push to main
           push: ${{ github.event_name == 'release' || (github.event_name == 'workflow_dispatch' && github.event.inputs.push_image == 'true') || github.event_name == 'push' }}
           tags: ${{ steps.meta.outputs.tags }}
