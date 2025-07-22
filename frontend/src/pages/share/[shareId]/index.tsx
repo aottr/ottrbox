@@ -24,7 +24,7 @@ export function getServerSideProps(context: GetServerSidePropsContext) {
 
 const Share = ({ shareId }: { shareId: string }) => {
   const modals = useModals();
-  const { data: share, error, refetch } = useQuery<ShareType>({
+  const { data: share, error, refetch, isLoading } = useQuery<ShareType>({
     queryKey: ["share", shareId],
     retry: false,
     queryFn: () => shareService.get(shareId)
@@ -127,8 +127,8 @@ const Share = ({ shareId }: { shareId: string }) => {
 
       <FileList
         files={share?.files || []}
-        share={share!}
-        isLoading={!share}
+        share={share}
+        isLoading={isLoading}
       />
     </>
   );
