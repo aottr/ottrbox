@@ -12,6 +12,7 @@ import useTranslate from "../../hooks/useTranslate.hook";
 import shareService from "../../services/share.service";
 import { FileListItem, FileMetaData, FileUpload } from "../../types/File.type";
 import toast from "../../utils/toast.util";
+import { useQueryClient } from "@tanstack/react-query";
 
 const promiseLimit = pLimit(3);
 let errorToastShown = false;
@@ -29,6 +30,7 @@ const EditableUpload = ({
   const t = useTranslate();
   const router = useRouter();
   const config = useConfig();
+  const queryClient = useQueryClient();
 
   const chunkSize = useRef(parseInt(config.get("share.chunkSize")));
 
@@ -170,6 +172,8 @@ const EditableUpload = ({
       await completeShare();
 
       if (!hasFailed) {
+        // respect isReverseShare in queryKey if this component is used for reverse shares
+        queryClient.invalidateQueries({ queryKey: ["share", shareId] });
         toast.success(t("share.edit.notify.save-success"));
         router.back();
       }
