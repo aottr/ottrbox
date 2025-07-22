@@ -9,6 +9,8 @@ import useConfirmLeave from "../../../hooks/confirm-leave.hook";
 import useTranslate from "../../../hooks/useTranslate.hook";
 import shareService from "../../../services/share.service";
 import { Share as ShareType } from "../../../types/share.type";
+import { useQuery } from "@tanstack/react-query";
+import { AxiosError } from "axios";
 
 export function getServerSideProps(context: GetServerSidePropsContext) {
   return {
@@ -20,8 +22,11 @@ const Share = ({ shareId }: { shareId: string }) => {
   const t = useTranslate();
   const modals = useModals();
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [share, setShare] = useState<ShareType>();
+  const { data: share, error, isLoading } = useQuery<ShareType>({
+    queryKey: ["share", shareId],
+    retry: false,
+    queryFn: () => shareService.getFromOwner(shareId)
+  });
 
   useConfirmLeave({
     message: t("upload.notify.confirm-leave"),
@@ -29,41 +34,35 @@ const Share = ({ shareId }: { shareId: string }) => {
   });
 
   useEffect(() => {
-    shareService
-      .getFromOwner(shareId)
-      .then((share) => {
-        setShare(share);
-      })
-      .catch((e) => {
-        const { error } = e.response.data;
-        if (e.response.status == 404) {
-          if (error == "share_removed") {
-            showErrorModal(
-              modals,
-              t("share.error.removed.title"),
-              e.response.data.message,
-            );
-          } else {
-            showErrorModal(
-              modals,
-              t("share.error.not-found.title"),
-              t("share.error.not-found.description"),
-            );
-          }
-        } else if (e.response.status == 403 && error == "share_removed") {
-          showErrorModal(
-            modals,
-            t("share.error.access-denied.title"),
-            t("share.error.access-denied.description"),
-          );
-        } else {
-          showErrorModal(modals, t("common.error"), t("common.error.unknown"));
-        }
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
+    if (!(error instanceof AxiosError) || !error.response) {
+      return;
+    }
+
+    const { data: errorData, status: errorStatus } = error.response;
+    if (errorStatus == 404) {
+      if (errorData.error == "share_removed") {
+        showErrorModal(
+          modals,
+          t("share.error.removed.title"),
+          errorData.message,
+        );
+      } else {
+        showErrorModal(
+          modals,
+          t("share.error.not-found.title"),
+          t("share.error.not-found.description"),
+        );
+      }
+    } else if (errorStatus == 403) {
+      showErrorModal(
+        modals,
+        t("share.error.access-denied.title"),
+        t("share.error.access-denied.description"),
+      );
+    } else {
+      showErrorModal(modals, t("common.error"), t("common.error.unknown"));
+    }
+  }, [error]);
 
   if (isLoading) return <LoadingOverlay visible />;
 
