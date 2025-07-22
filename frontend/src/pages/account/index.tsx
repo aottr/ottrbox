@@ -43,7 +43,6 @@ const Account = () => {
   const { user, refreshUser } = useUser();
   const modals = useModals();
   const t = useTranslate();
-  const config = useConfig();
 
   const accountForm = useForm({
     initialValues: {

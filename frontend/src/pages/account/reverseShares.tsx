@@ -14,8 +14,8 @@ import {
 } from "@mantine/core";
 import { useClipboard } from "@mantine/hooks";
 import { useModals } from "@mantine/modals";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import moment from "moment";
-import { useEffect, useState } from "react";
 import { TbInfoCircle, TbLink, TbPlus, TbTrash } from "react-icons/tb";
 import { FormattedMessage } from "react-intl";
 import Meta from "../../components/Meta";
@@ -34,22 +34,51 @@ const MyShares = () => {
   const modals = useModals();
   const clipboard = useClipboard();
   const t = useTranslate();
+  const queryClient = useQueryClient();
 
   const config = useConfig();
 
-  const [reverseShares, setReverseShares] = useState<MyReverseShare[]>();
+  const {
+    data: reverseShares,
+    isLoading,
+    isError,
+    refetch
+  } = useQuery<MyReverseShare[]>({
+    queryKey: ["myReverseShares"],
+    queryFn: shareService.getMyReverseShares,
+  });
 
-  const getReverseShares = () => {
-    shareService
-      .getMyReverseShares()
-      .then((shares) => setReverseShares(shares));
-  };
+  const deleteReverseShareMutation = useMutation({
+    mutationFn: (reverseShare: string) => shareService.removeReverseShare(reverseShare),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["myReverseShares"] });
+      toast.success(t("account.shares.notify.deleted-success"));
+    },
+    onError: () => {
+      toast.error(t("account.shares.notify.delete-fail"));
+    },
+  });
 
-  useEffect(() => {
-    getReverseShares();
-  }, []);
+  if (isError) {
+    return (
+      <Center style={{ height: "70vh" }}>
+        <Stack align="center">
+          <Title order={3} size={100}>
+            {t("error.description")}
+          </Title>
+          <Text mt="xl" size="lg">
+            {t("error.msg.default")}
+          </Text>
+          <Button onClick={() => refetch()} variant="light">
+            <FormattedMessage id="common.button.retry" />
+          </Button>
+        </Stack>
+      </Center>
+    );
+  }
 
-  if (!reverseShares) return <CenterLoader />;
+  if (isLoading || !reverseShares) return <CenterLoader />;
+
   return (
     <>
       <Meta title={t("account.reverseShares.title")} />
@@ -76,7 +105,7 @@ const MyShares = () => {
               modals,
               config.get("smtp.enabled"),
               config.get("share.maxExpiration"),
-              getReverseShares,
+              refetch,
             )
           }
           leftIcon={<TbPlus size={20} />}
@@ -133,11 +162,11 @@ const MyShares = () => {
                             <Text size="sm">
                               {reverseShare.shares.length == 1
                                 ? `1 ${t(
-                                    "account.reverseShares.table.count.singular",
-                                  )}`
+                                  "account.reverseShares.table.count.singular",
+                                )}`
                                 : `${reverseShare.shares.length} ${t(
-                                    "account.reverseShares.table.count.plural",
-                                  )}`}
+                                  "account.reverseShares.table.count.plural",
+                                )}`}
                             </Text>
                           </Accordion.Control>
                           <Accordion.Panel>
@@ -195,9 +224,7 @@ const MyShares = () => {
                         onClick={() => {
                           if (window.isSecureContext) {
                             clipboard.copy(
-                              `${window.location.origin}/upload/${
-                                reverseShare.token
-                              }`,
+                              `${window.location.origin}/upload/${reverseShare.token}`,
                             );
                             toast.success(t("common.notify.copied-link"));
                           } else {
@@ -231,14 +258,7 @@ const MyShares = () => {
                               confirm: t("common.button.delete"),
                               cancel: t("common.button.cancel"),
                             },
-                            onConfirm: () => {
-                              shareService.removeReverseShare(reverseShare.id);
-                              setReverseShares(
-                                reverseShares.filter(
-                                  (item) => item.id !== reverseShare.id,
-                                ),
-                              );
-                            },
+                            onConfirm: () => deleteReverseShareMutation.mutate(reverseShare.id),
                           });
                         }}
                       >

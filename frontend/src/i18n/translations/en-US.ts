@@ -168,6 +168,8 @@ export default {
   "account.shares.modal.delete.title": "Delete share: {share}",
   "account.shares.modal.delete.description":
     "Do you really want to delete this share?",
+  "account.shares.notify.deleted-success": "Share deleted successfully",
+  "account.shares.notify.delete-fail": "Could not delete share",
 
   // END /account/shares
 
@@ -744,6 +746,7 @@ export default {
   "common.button.share": "Share",
   "common.button.generate": "Generate",
   "common.button.done": "Done",
+  "common.button.retry": "Retry",
   "common.text.link": "Link",
   "common.text.navigate-to-link": "Visit link",
   "common.text.or": "or",
