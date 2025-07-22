@@ -27,7 +27,7 @@ const FileList = ({
   isLoading,
 }: {
   files: FileMetaData[];
-  share: Share;
+  share?: Share;
   isLoading: boolean;
 }) => {
   const clipboard = useClipboard();
@@ -57,7 +57,8 @@ const FileList = ({
   }, [files, sort]);
 
   const copyFileLink = (file: FileMetaData) => {
-    const link = `${window.location.origin}/api/shares/${share.id
+
+    const link = `${window.location.origin}/api/shares/${share!.id
       }/files/${file.id}`;
 
     if (window.isSecureContext) {
@@ -96,7 +97,7 @@ const FileList = ({
           </tr>
         </thead>
         <tbody>
-          {isLoading
+          {isLoading || !share
             ? skeletonRows
             : sortedFiles.map((file, index) => (
               <tr key={index}>
