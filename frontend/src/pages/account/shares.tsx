@@ -12,9 +12,9 @@ import {
 } from "@mantine/core";
 import { useClipboard } from "@mantine/hooks";
 import { useModals } from "@mantine/modals";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import moment from "moment";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { TbEdit, TbInfoCircle, TbLink, TbLock, TbTrash } from "react-icons/tb";
 import { FormattedMessage } from "react-intl";
 import Meta from "../../components/Meta";
@@ -32,14 +32,48 @@ const MyShares = () => {
   const clipboard = useClipboard();
   const config = useConfig();
   const t = useTranslate();
+  const queryClient = useQueryClient();
 
-  const [shares, setShares] = useState<MyShare[]>();
+  const {
+    data: shares,
+    isLoading,
+    isError,
+    refetch
+  } = useQuery<MyShare[]>({
+    queryKey: ["myShares"],
+    queryFn: shareService.getMyShares,
+  });
 
-  useEffect(() => {
-    shareService.getMyShares().then((shares) => setShares(shares));
-  }, []);
+  const deleteShareMutation = useMutation({
+    mutationFn: (shareId: string) => shareService.remove(shareId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["myShares"] });
+      toast.success(t("account.shares.notify.deleted-success"));
+    },
+    onError: () => {
+      toast.error(t("account.shares.notify.delete-fail"));
+    },
+  });
 
-  if (!shares) return <CenterLoader />;
+  if (isError) {
+    return (
+      <Center style={{ height: "70vh" }}>
+        <Stack align="center">
+          <Title order={3} size={100}>
+            {t("error.description")}
+          </Title>
+          <Text mt="xl" size="lg">
+            {t("error.msg.default")}
+          </Text>
+          <Button onClick={() => refetch()} variant="light">
+            <FormattedMessage id="common.button.retry" />
+          </Button>
+        </Stack>
+      </Center>
+    );
+  }
+
+  if (isLoading || !shares) return <CenterLoader />;
 
   return (
     <>
@@ -176,12 +210,7 @@ const MyShares = () => {
                               confirm: t("common.button.delete"),
                               cancel: t("common.button.cancel"),
                             },
-                            onConfirm: () => {
-                              shareService.remove(share.id);
-                              setShares(
-                                shares.filter((item) => item.id !== share.id),
-                              );
-                            },
+                            onConfirm: () => deleteShareMutation.mutate(share.id),
                           });
                         }}
                       >

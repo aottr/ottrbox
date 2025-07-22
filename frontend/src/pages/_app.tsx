@@ -18,6 +18,12 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { IntlProvider } from "react-intl";
+import {
+  HydrationBoundary,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import Header from "../components/header/Header";
 import { ConfigContext } from "../hooks/config.hook";
 import { UserContext } from "../hooks/user.hook";
@@ -39,6 +45,7 @@ function App({ Component, pageProps }: AppProps) {
   const systemTheme = useColorScheme(pageProps.colorScheme);
   const router = useRouter();
 
+  const [queryClient] = useState(() => new QueryClient())
   const [colorScheme, setColorScheme] = useState<ColorScheme>(systemTheme);
 
   const [user, setUser] = useState<CurrentUser | null>(pageProps.user);
@@ -106,65 +113,70 @@ function App({ Component, pageProps }: AppProps) {
           content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
         />
       </Head>
-      <IntlProvider
-        messages={i18nMessages}
-        locale={language.current}
-        defaultLocale={LOCALES.ENGLISH.code}
-      >
-        <MantineProvider
-          withGlobalStyles
-          withNormalizeCSS
-          theme={{ colorScheme, ...globalStyle }}
-        >
-          <ColorSchemeProvider
-            colorScheme={colorScheme}
-            toggleColorScheme={toggleColorScheme}
+      <QueryClientProvider client={queryClient}>
+        <HydrationBoundary state={pageProps.dehydratedState}>
+          <IntlProvider
+            messages={i18nMessages}
+            locale={language.current}
+            defaultLocale={LOCALES.ENGLISH.code}
           >
-            <GlobalStyle />
-            <Notifications />
-            <ModalsProvider>
-              <ConfigContext.Provider
-                value={{
-                  configVariables,
-                  refresh: async () => {
-                    setConfigVariables(await configService.list());
-                  },
-                }}
+            <MantineProvider
+              withGlobalStyles
+              withNormalizeCSS
+              theme={{ colorScheme, ...globalStyle }}
+            >
+              <ColorSchemeProvider
+                colorScheme={colorScheme}
+                toggleColorScheme={toggleColorScheme}
               >
-                <UserContext.Provider
-                  value={{
-                    user,
-                    refreshUser: async () => {
-                      const user = await userService.getCurrentUser();
-                      setUser(user);
-                      return user;
-                    },
-                  }}
-                >
-                  {excludeDefaultLayoutRoutes.includes(route) ? (
-                    <Component {...pageProps} />
-                  ) : (
-                    <>
-                      <Stack
-                        justify="space-between"
-                        sx={{ minHeight: "100vh" }}
-                      >
-                        <div>
-                          <Header />
-                          <Container>
-                            <Component {...pageProps} />
-                          </Container>
-                        </div>
-                        <Footer />
-                      </Stack>
-                    </>
-                  )}
-                </UserContext.Provider>
-              </ConfigContext.Provider>
-            </ModalsProvider>
-          </ColorSchemeProvider>
-        </MantineProvider>
-      </IntlProvider>
+                <GlobalStyle />
+                <Notifications />
+                <ModalsProvider>
+                  <ConfigContext.Provider
+                    value={{
+                      configVariables,
+                      refresh: async () => {
+                        setConfigVariables(await configService.list());
+                      },
+                    }}
+                  >
+                    <UserContext.Provider
+                      value={{
+                        user,
+                        refreshUser: async () => {
+                          const user = await userService.getCurrentUser();
+                          setUser(user);
+                          return user;
+                        },
+                      }}
+                    >
+                      {excludeDefaultLayoutRoutes.includes(route) ? (
+                        <Component {...pageProps} />
+                      ) : (
+                        <>
+                          <Stack
+                            justify="space-between"
+                            sx={{ minHeight: "100vh" }}
+                          >
+                            <div>
+                              <Header />
+                              <Container>
+                                <Component {...pageProps} />
+                              </Container>
+                            </div>
+                            <Footer />
+                          </Stack>
+                        </>
+                      )}
+                    </UserContext.Provider>
+                  </ConfigContext.Provider>
+                </ModalsProvider>
+              </ColorSchemeProvider>
+            </MantineProvider>
+          </IntlProvider>
+        </HydrationBoundary>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
     </>
   );
 }
