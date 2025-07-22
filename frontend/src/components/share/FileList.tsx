@@ -9,10 +9,9 @@ import {
 } from "@mantine/core";
 import { useClipboard } from "@mantine/hooks";
 import { useModals } from "@mantine/modals";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import { TbDownload, TbEye, TbLink } from "react-icons/tb";
 import { FormattedMessage } from "react-intl";
-import useConfig from "../../hooks/config.hook";
 import useTranslate from "../../hooks/useTranslate.hook";
 import shareService from "../../services/share.service";
 import { FileMetaData } from "../../types/File.type";
@@ -24,17 +23,14 @@ import showFilePreviewModal from "./modals/showFilePreviewModal";
 
 const FileList = ({
   files,
-  setShare,
   share,
   isLoading,
 }: {
-  files?: FileMetaData[];
-  setShare: Dispatch<SetStateAction<Share | undefined>>;
+  files: FileMetaData[];
   share: Share;
   isLoading: boolean;
 }) => {
   const clipboard = useClipboard();
-  const config = useConfig();
   const modals = useModals();
   const t = useTranslate();
 
@@ -43,31 +39,26 @@ const FileList = ({
     direction: "desc",
   });
 
-  const sortFiles = () => {
+  const sortedFiles = useMemo(() => {
     if (files && sort.property) {
-      const sortedFiles = files.sort((a: any, b: any) => {
+      return [...files].sort((a, b) => {
+        const property = sort.property as keyof FileMetaData;
         if (sort.direction === "asc") {
-          return b[sort.property!].localeCompare(a[sort.property!], undefined, {
-            numeric: true,
-          });
-        } else {
-          return a[sort.property!].localeCompare(b[sort.property!], undefined, {
+          return a[property].localeCompare(b[property], undefined, {
             numeric: true,
           });
         }
-      });
-
-      setShare({
-        ...share,
-        files: sortedFiles,
+        return b[property].localeCompare(a[property], undefined, {
+          numeric: true,
+        });
       });
     }
-  };
+    return files;
+  }, [files, sort]);
 
   const copyFileLink = (file: FileMetaData) => {
-    const link = `${window.location.origin}/api/shares/${
-      share.id
-    }/files/${file.id}`;
+    const link = `${window.location.origin}/api/shares/${share.id
+      }/files/${file.id}`;
 
     if (window.isSecureContext) {
       clipboard.copy(link);
@@ -83,8 +74,6 @@ const FileList = ({
       });
     }
   };
-
-  useEffect(sortFiles, [sort]);
 
   return (
     <Box sx={{ display: "block", overflowX: "auto" }}>
@@ -109,42 +98,42 @@ const FileList = ({
         <tbody>
           {isLoading
             ? skeletonRows
-            : files!.map((file) => (
-                <tr key={file.name}>
-                  <td>{file.name}</td>
-                  <td>{byteToHumanSizeString(parseInt(file.size))}</td>
-                  <td>
-                    <Group position="right">
-                      {shareService.doesFileSupportPreview(file.name) && (
-                        <ActionIcon
-                          onClick={() =>
-                            showFilePreviewModal(share.id, file, modals)
-                          }
-                          size={25}
-                        >
-                          <TbEye />
-                        </ActionIcon>
-                      )}
-                      {!share.hasPassword && (
-                        <ActionIcon
-                          size={25}
-                          onClick={() => copyFileLink(file)}
-                        >
-                          <TbLink />
-                        </ActionIcon>
-                      )}
+            : sortedFiles.map((file, index) => (
+              <tr key={index}>
+                <td>{file.name}</td>
+                <td>{file.size ? byteToHumanSizeString(parseInt(file.size)) : "-"}</td>
+                <td>
+                  <Group position="right">
+                    {shareService.doesFileSupportPreview(file.name) && (
+                      <ActionIcon
+                        onClick={() =>
+                          showFilePreviewModal(share.id, file, modals)
+                        }
+                        size={25}
+                      >
+                        <TbEye />
+                      </ActionIcon>
+                    )}
+                    {!share.hasPassword && (
                       <ActionIcon
                         size={25}
-                        onClick={async () => {
-                          await shareService.downloadFile(share.id, file.id);
-                        }}
+                        onClick={() => copyFileLink(file)}
                       >
-                        <TbDownload />
+                        <TbLink />
                       </ActionIcon>
-                    </Group>
-                  </td>
-                </tr>
-              ))}
+                    )}
+                    <ActionIcon
+                      size={25}
+                      onClick={async () => {
+                        await shareService.downloadFile(share.id, file.id);
+                      }}
+                    >
+                      <TbDownload />
+                    </ActionIcon>
+                  </Group>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </Table>
     </Box>
@@ -155,9 +144,6 @@ const skeletonRows = [...Array(5)].map((c, i) => (
   <tr key={i}>
     <td>
       <Skeleton height={30} width={30} />
-    </td>
-    <td>
-      <Skeleton height={14} />
     </td>
     <td>
       <Skeleton height={14} />

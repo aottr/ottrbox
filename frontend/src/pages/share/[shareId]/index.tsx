@@ -1,8 +1,9 @@
 import { Box, Group, Text, Title } from "@mantine/core";
 import { useModals } from "@mantine/modals";
 import { GetServerSidePropsContext } from "next";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { FormattedMessage } from "react-intl";
+import { useQuery } from "@tanstack/react-query";
 import Meta from "../../../components/Meta";
 import DownloadAllButton from "../../../components/share/DownloadAllButton";
 import FileList from "../../../components/share/FileList";
@@ -13,6 +14,7 @@ import shareService from "../../../services/share.service";
 import { Share as ShareType } from "../../../types/share.type";
 import toast from "../../../utils/toast.util";
 import { byteToHumanSizeString } from "../../../utils/fileSize.util";
+import { AxiosError } from "axios";
 
 export function getServerSideProps(context: GetServerSidePropsContext) {
   return {
@@ -22,7 +24,12 @@ export function getServerSideProps(context: GetServerSidePropsContext) {
 
 const Share = ({ shareId }: { shareId: string }) => {
   const modals = useModals();
-  const [share, setShare] = useState<ShareType>();
+  const { data: share, error, refetch } = useQuery<ShareType>({
+    queryKey: ["share", shareId],
+    retry: false,
+    queryFn: () => shareService.get(shareId)
+  });
+
   const t = useTranslate();
 
   const getShareToken = async (password?: string) => {
@@ -30,7 +37,7 @@ const Share = ({ shareId }: { shareId: string }) => {
       .getShareToken(shareId, password)
       .then(() => {
         modals.closeAll();
-        getFiles();
+        refetch();
       })
       .catch((e) => {
         const { error } = e.response.data;
@@ -49,54 +56,41 @@ const Share = ({ shareId }: { shareId: string }) => {
       });
   };
 
-  const getFiles = async () => {
-    shareService
-      .get(shareId)
-      .then((share) => {
-        setShare(share);
-      })
-      .catch((e) => {
-        const { error } = e.response.data;
-        if (e.response.status == 404) {
-          if (error == "share_removed") {
-            showErrorModal(
-              modals,
-              t("share.error.removed.title"),
-              e.response.data.message,
-              "go-home",
-            );
-          } else {
-            showErrorModal(
-              modals,
-              t("share.error.not-found.title"),
-              t("share.error.not-found.description"),
-              "go-home",
-            );
-          }
-        } else if (e.response.status == 403 && error == "private_share") {
-          showErrorModal(
-            modals,
-            t("share.error.access-denied.title"),
-            t("share.error.access-denied.description"),
-          );
-        } else if (error == "share_password_required") {
-          showEnterPasswordModal(modals, getShareToken);
-        } else if (error == "share_token_required") {
-          getShareToken();
-        } else {
-          showErrorModal(
-            modals,
-            t("common.error"),
-            t("common.error.unknown"),
-            "go-home",
-          );
-        }
-      });
-  };
-
   useEffect(() => {
-    getFiles();
-  }, []);
+    if (!(error instanceof AxiosError) || !error.response) {
+      return;
+    }
+
+    const { data: errorData, status: errorStatus } = error.response;
+    if (errorStatus == 404) {
+      if (errorData.error == "share_removed") {
+        showErrorModal(
+          modals,
+          t("share.error.removed.title"),
+          errorData.message,
+          "go-home",
+        );
+      } else {
+        showErrorModal(
+          modals,
+          t("share.error.not-found.title"),
+          t("share.error.not-found.description"),
+          "go-home",
+        );
+      }
+    } else if (errorData.error == "share_password_required") {
+      showEnterPasswordModal(modals, getShareToken);
+    } else if (errorData.error == "share_token_required") {
+      getShareToken();
+    } else {
+      showErrorModal(
+        modals,
+        t("common.error"),
+        t("common.error.unknown"),
+        "go-home",
+      );
+    }
+  }, [error])
 
   return (
     <>
@@ -132,8 +126,7 @@ const Share = ({ shareId }: { shareId: string }) => {
       </Group>
 
       <FileList
-        files={share?.files}
-        setShare={setShare}
+        files={share?.files || []}
         share={share!}
         isLoading={!share}
       />
