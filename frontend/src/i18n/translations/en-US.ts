@@ -469,8 +469,8 @@ export default {
   "admin.config.email.reply-to-email": "Reply to email",
   "admin.config.email.reply-to-email.description":
     "(Optional) The email address which should be used as the reply-to address for emails sent. If not set, the default email address will be used.",
-  "admin.config.email.share-sender-name": "Share sender name",
-  "admin.config.email.share-sender-name.description": "(Optional) Setting this will override the default sender name. The application name will be used if this is not set.",
+  "admin.config.email.sender-name": "Sender name",
+  "admin.config.email.sender-name.description": "(Optional) Setting this will override the default sender name. The application name will be used if this is not set.",
   "admin.config.email.share-recipients-subject": "Share recipients subject",
   "admin.config.email.share-recipients-subject.description":
     "Subject of the email which gets sent to the share recipients.",
