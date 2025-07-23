@@ -1,5 +1,5 @@
 services:
- ottrbox:
+  ottrbox:
     image: ghcr.io/aottr/ottrbox
     restart: unless-stopped
     ports:
