@@ -1,7 +1,7 @@
 import { LoadingOverlay } from "@mantine/core";
 import { useModals } from "@mantine/modals";
 import { GetServerSidePropsContext } from "next";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Meta from "../../../components/Meta";
 import showErrorModal from "../../../components/share/showErrorModal";
 import EditableUpload from "../../../components/upload/EditableUpload";
