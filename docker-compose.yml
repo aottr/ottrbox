@@ -1,6 +1,6 @@
 services:
- ottrbox:
-    image: ghcr.io/aottr/ottrbox
+  ottrbox:
+    image: ghcr.io/aottr/ottrbox:dev-e63aee8
     restart: unless-stopped
     ports:
       - 3000:3000
@@ -13,3 +13,19 @@ services:
 
   # To add ClamAV, to scan your shares for malicious files, 
   # see https://stonith404.github.io/pingvin-share/setup/integrations/#clamav-docker-only
+
+  smtp4dev:
+    image: rnwood/smtp4dev:v3
+    restart: unless-stopped
+    ports:
+      - 5000:80
+      - 25:25
+      - 143:143
+    volumes:
+      - smtp4dev-data:/smtp4dev
+    environment:
+      - ServerOptions__Urls=http://*:80
+      - ServerOptions__HostName=smtp4dev
+
+volumes:
+  smtp4dev-data:

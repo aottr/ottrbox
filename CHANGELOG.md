@@ -1,3 +1,19 @@
+## [1.14.1](https://github.com/aottr/ottrbox/compare/v1.14.0...v1.14.1) (2025-07-23)
+
+
+### Features
+
+* improve table props and loading state ([883addf](https://github.com/aottr/ottrbox/commit/883addf28befadca03f03491bb980bc6578f2827))
+* migrate share view to tanstack-query, fix sorting ([772369e](https://github.com/aottr/ottrbox/commit/772369e0a4efa5f585ca96a3e879624886cf9033))
+* migrate shares and reverseShares to tanstack-query ([8e3cc3e](https://github.com/aottr/ottrbox/commit/8e3cc3efa52371872b9fa7d0ce59b26545e14e4b))
+* remove additional upload button ([0e7dbfa](https://github.com/aottr/ottrbox/commit/0e7dbfa12f5ff8cb1495cb1c803bb33a5f317efa))
+* revalidate cache after upload for share edit ([d8c5237](https://github.com/aottr/ottrbox/commit/d8c5237f6960829a16cbba86779d53f711cbe503))
+
+
+### Bug Fixes
+
+* return correct error message on edit-access without permission ([fd83610](https://github.com/aottr/ottrbox/commit/fd83610930dfcf4d54595d84b9506abd58df77a5))
+
 ## [1.14.0](https://github.com/aottr/ottrbox/compare/v1.13.0...v1.14.0) (2025-07-20)
 
 ### Features
