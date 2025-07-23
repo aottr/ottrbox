@@ -6,6 +6,7 @@ import {
   CreateShare,
   MyReverseShare,
   MyShare,
+  ReverseShare,
   Share,
   ShareMetaData,
 } from "../types/share.type";
@@ -131,7 +132,7 @@ const getMyReverseShares = async (): Promise<MyReverseShare[]> => {
   return (await api.get("reverseShares")).data;
 };
 
-const setReverseShare = async (reverseShareToken: string) => {
+const getReverseShare = async (reverseShareToken: string): Promise<ReverseShare> => {
   const { data } = await api.get(`/reverseShares/${reverseShareToken}`);
   setCookie("reverse_share_token", reverseShareToken);
   return data;
@@ -157,7 +158,7 @@ export default {
   downloadFile,
   removeFile,
   uploadFile,
-  setReverseShare,
+  getReverseShare,
   createReverseShare,
   getMyReverseShares,
   removeReverseShare,

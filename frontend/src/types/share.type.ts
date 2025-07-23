@@ -11,6 +11,14 @@ export type Share = {
   hasPassword: boolean;
 };
 
+export type ReverseShare = {
+  id: string;
+  maxShareSize: string;
+  shareExpiration: Date;
+  token: string;
+  simplified: boolean;
+}
+
 export type CompletedShare = Share & {
   /**
    * undefined means is not reverse share

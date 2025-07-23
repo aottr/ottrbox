@@ -67,7 +67,7 @@ const Body = ({ share }: { share: CompletedShare }) => {
         onClick={() => {
           modals.closeAll();
           if (isReverseShare) {
-            router.reload();
+            router.push("/");
           } else {
             router.push("/upload");
           }
