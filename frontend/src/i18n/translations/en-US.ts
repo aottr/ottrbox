@@ -1,6 +1,7 @@
 export default {
   // Navbar
   "navbar.upload": "Upload",
+  "navbar.shares": "Shares",
   "navbar.signin": "Sign in",
   "navbar.home": "Home",
   "navbar.signup": "Sign up",

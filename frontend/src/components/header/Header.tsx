@@ -5,6 +5,7 @@ import {
   createStyles,
   Group,
   Header as MantineHeader,
+  MediaQuery,
   Paper,
   Stack,
   Text,
@@ -13,101 +14,23 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { ReactNode, useEffect, useState } from "react";
+import { Fragment, ReactNode, useEffect, useState } from "react";
 import useConfig from "../../hooks/config.hook";
 import useUser from "../../hooks/user.hook";
 import useTranslate from "../../hooks/useTranslate.hook";
 import Logo from "../Logo";
 import ActionAvatar from "./ActionAvatar";
 import NavbarShareMenu from "./NavbarShareMenu";
-
-const HEADER_HEIGHT = 60;
+import { useStyles, HEADER_HEIGHT } from "./Header.styles";
+import { TbUpload } from "react-icons/tb";
 
 type NavLink = {
   link?: string;
   label?: string;
+  icon?: ReactNode;
   component?: ReactNode;
   action?: () => Promise<void>;
 };
-
-const useStyles = createStyles((theme) => ({
-  root: {
-    position: "relative",
-    zIndex: 1,
-  },
-
-  dropdown: {
-    position: "absolute",
-    top: HEADER_HEIGHT,
-    left: 0,
-    right: 0,
-    zIndex: 0,
-    borderTopRightRadius: 0,
-    borderTopLeftRadius: 0,
-    borderTopWidth: 0,
-    overflow: "hidden",
-
-    [theme.fn.largerThan("sm")]: {
-      display: "none",
-    },
-  },
-
-  header: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    height: "100%",
-  },
-
-  links: {
-    [theme.fn.smallerThan("sm")]: {
-      display: "none",
-    },
-  },
-
-  burger: {
-    [theme.fn.largerThan("sm")]: {
-      display: "none",
-    },
-  },
-
-  link: {
-    display: "block",
-    lineHeight: 1,
-    padding: "8px 12px",
-    borderRadius: theme.radius.sm,
-    textDecoration: "none",
-    color:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[0]
-        : theme.colors.gray[7],
-    fontSize: theme.fontSizes.sm,
-    fontWeight: 500,
-
-    "&:hover": {
-      backgroundColor:
-        theme.colorScheme === "dark"
-          ? theme.colors.dark[6]
-          : theme.colors.gray[0],
-    },
-
-    [theme.fn.smallerThan("sm")]: {
-      borderRadius: 0,
-      padding: theme.spacing.md,
-    },
-  },
-
-  linkActive: {
-    "&, &:hover": {
-      backgroundColor:
-        theme.colorScheme === "dark"
-          ? theme.fn.rgba(theme.colors[theme.primaryColor][9], 0.25)
-          : theme.colors[theme.primaryColor][0],
-      color:
-        theme.colors[theme.primaryColor][theme.colorScheme === "dark" ? 3 : 7],
-    },
-  },
-}));
 
 const Header = () => {
   const { user } = useUser();
@@ -126,6 +49,7 @@ const Header = () => {
   const authenticatedLinks: NavLink[] = [
     {
       link: "/upload",
+      icon: <TbUpload size={14} />,
       label: t("navbar.upload"),
     },
     {
@@ -146,6 +70,7 @@ const Header = () => {
   if (config.get("share.allowUnauthenticatedShares")) {
     unauthenticatedLinks.unshift({
       link: "/upload",
+      icon: <TbUpload size={14} />,
       label: t("navbar.upload"),
     });
   }
@@ -167,21 +92,19 @@ const Header = () => {
     <>
       {(user ? authenticatedLinks : unauthenticatedLinks).map((link, i) => {
         if (link.component) {
-          return (
-            <Box pl={5} py={15} key={i}>
-              {link.component}
-            </Box>
-          );
+          return <Fragment key={i}>{link.component}</Fragment>;
         }
         return (
           <Link
-            key={link.label}
+            key={i}
             href={link.link ?? ""}
             onClick={() => toggleOpened.toggle()}
             className={cx(classes.link, {
               [classes.linkActive]: currentRoute == link.link,
+              [classes.withIcon]: !!link.icon,
             })}
           >
+            {link.icon}
             {link.label}
           </Link>
         );
@@ -200,12 +123,13 @@ const Header = () => {
         <Group spacing={5} className={classes.links}>
           <Group>{items} </Group>
         </Group>
-        <Burger
-          opened={opened}
-          onClick={() => toggleOpened.toggle()}
-          className={classes.burger}
-          size="sm"
-        />
+        <MediaQuery largerThan="sm" styles={{ display: "none" }}>
+          <Burger
+            opened={opened}
+            onClick={() => toggleOpened.toggle()}
+            size="sm"
+          />
+        </MediaQuery>
         <Transition transition="pop-top-right" duration={200} mounted={opened}>
           {(styles) => (
             <Paper className={classes.dropdown} withBorder style={styles}>

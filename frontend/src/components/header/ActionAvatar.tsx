@@ -1,19 +1,22 @@
-import { ActionIcon, Avatar, Menu } from "@mantine/core";
+import { ActionIcon, Avatar, Box, Button, MediaQuery, Menu } from "@mantine/core";
 import Link from "next/link";
 import { TbDoorExit, TbSettings, TbUser } from "react-icons/tb";
 import useUser from "../../hooks/user.hook";
 import authService from "../../services/auth.service";
 import { FormattedMessage, useIntl } from "react-intl";
+import { useStyles } from "./Header.styles";
 
 const ActionAvatar = () => {
   const { user } = useUser();
+  const { classes, cx } = useStyles();
 
   return (
     <Menu position="bottom-start" withinPortal>
       <Menu.Target>
-        <ActionIcon>
-          <Avatar size={28} />
-        </ActionIcon>
+        <Box className={cx(classes.link, classes.withIcon)}>
+          <TbUser size={14} />
+          {user?.username}
+        </Box>
       </Menu.Target>
       <Menu.Dropdown>
         <Menu.Item component={Link} href="/account" icon={<TbUser size={14} />}>
