@@ -74,7 +74,7 @@ export class ConfigService extends EventEmitter {
     const userCount = await this.prisma.user.count({
       where: { isAdmin: true },
     });
-    if (userCount === 1) {
+    if (userCount >= 1) {
       this.logger.log(
         "Skip initial user creation. Admin user is already existent.",
       );
