@@ -33,7 +33,7 @@ export class AuthService {
     private ldapService: LdapService,
     private userService: UserSevice,
     @Inject(forwardRef(() => OAuthService)) private oAuthService: OAuthService,
-  ) {}
+  ) { }
   private readonly logger = new Logger(AuthService.name);
 
   async signUp(dto: AuthRegisterDTO, ip: string, isAdmin?: boolean) {
@@ -235,53 +235,58 @@ export class AuthService {
         refreshTokenId: string;
       }) || {};
 
-    if (refreshTokenId) {
-      const oauthIDToken = await this.prisma.refreshToken
-        .findFirst({
-          select: { oauthIDToken: true },
-          where: { id: refreshTokenId },
-        })
-        .then((refreshToken) => refreshToken?.oauthIDToken)
-        .catch((e) => {
-          // Ignore error if refresh token doesn't exist
-          if (e.code != "P2025") throw e;
-        });
-      await this.prisma.refreshToken
-        .delete({ where: { id: refreshTokenId } })
-        .catch((e) => {
-          // Ignore error if refresh token doesn't exist
-          if (e.code != "P2025") throw e;
-        });
+    if (!refreshTokenId) {
+      return;
+    }
 
-      if (typeof oauthIDToken === "string") {
-        const [providerName, idTokenHint] = oauthIDToken.split(":");
-        const provider = this.oAuthService.availableProviders()[providerName];
-        let signOutFromProviderSupportedAndActivated = false;
-        try {
-          signOutFromProviderSupportedAndActivated = this.config.get(
-            `oauth.${providerName}-signOut`,
+    const oauthIDToken = await this.prisma.refreshToken
+      .findFirst({
+        select: { oauthIDToken: true, userId: true },
+        where: { id: refreshTokenId },
+      })
+      .then((refreshToken) => {
+        this.logger.debug(`Sign out for user ${refreshToken?.userId} `)
+        return refreshToken?.oauthIDToken
+      })
+      .catch((e) => {
+        // Ignore error if refresh token doesn't exist
+        if (e.code != "P2025") throw e;
+      });
+    await this.prisma.refreshToken
+      .delete({ where: { id: refreshTokenId } })
+      .catch((e) => {
+        // Ignore error if refresh token doesn't exist
+        if (e.code != "P2025") throw e;
+      });
+
+    if (typeof oauthIDToken === "string") {
+      const [providerName, idTokenHint] = oauthIDToken.split(":");
+      const provider = this.oAuthService.availableProviders()[providerName];
+      let signOutFromProviderSupportedAndActivated = false;
+      try {
+        signOutFromProviderSupportedAndActivated = this.config.get(
+          `oauth.${providerName}-signOut`,
+        );
+      } catch (_) {
+        // Ignore error if the provider is not supported or if the provider sign out is not activated
+      }
+      if (
+        provider instanceof GenericOidcProvider &&
+        signOutFromProviderSupportedAndActivated
+      ) {
+        const configuration = await provider.getConfiguration();
+        if (URL.canParse(configuration.end_session_endpoint)) {
+          const redirectURI = new URL(configuration.end_session_endpoint);
+          redirectURI.searchParams.append(
+            "post_logout_redirect_uri",
+            this.config.get("general.appUrl"),
           );
-        } catch (_) {
-          // Ignore error if the provider is not supported or if the provider sign out is not activated
-        }
-        if (
-          provider instanceof GenericOidcProvider &&
-          signOutFromProviderSupportedAndActivated
-        ) {
-          const configuration = await provider.getConfiguration();
-          if (URL.canParse(configuration.end_session_endpoint)) {
-            const redirectURI = new URL(configuration.end_session_endpoint);
-            redirectURI.searchParams.append(
-              "post_logout_redirect_uri",
-              this.config.get("general.appUrl"),
-            );
-            redirectURI.searchParams.append("id_token_hint", idTokenHint);
-            redirectURI.searchParams.append(
-              "client_id",
-              this.config.get(`oauth.${providerName}-clientId`),
-            );
-            return redirectURI.toString();
-          }
+          redirectURI.searchParams.append("id_token_hint", idTokenHint);
+          redirectURI.searchParams.append(
+            "client_id",
+            this.config.get(`oauth.${providerName}-clientId`),
+          );
+          return redirectURI.toString();
         }
       }
     }

@@ -42,7 +42,7 @@ export class S3FileService {
   constructor(
     private prisma: PrismaService,
     private config: ConfigService,
-  ) {}
+  ) { }
 
   async create(
     data: string,
@@ -50,9 +50,16 @@ export class S3FileService {
     file: { id?: string; name: string },
     shareId: string,
   ) {
+    const originalFileId = file.id;
     if (!file.id) {
       file.id = crypto.randomUUID();
+      this.logger.debug(
+        `Upload started: shareId=${shareId} fileId=${file.id} fileName="${file.name}" note="generated fileId"`
+      );
     } else if (!isValidUUID(file.id)) {
+      this.logger.warn(
+        `Invalid fileId format on upload: shareId=${shareId} fileId="${originalFileId}"`
+      );
       throw new BadRequestException("Invalid file ID format");
     }
 
@@ -161,6 +168,9 @@ export class S3FileService {
           share: { connect: { id: shareId } },
         },
       });
+      this.logger.debug(
+        `File uploaded: shareId=${shareId} fileId=${file.id} fileName="${file.name}" size=${fileSize} mimeType=${mime.contentType(file.name.split(".").pop() ?? "") || false}`
+      );
     }
 
     return file;
@@ -180,16 +190,20 @@ export class S3FileService {
       }),
     );
 
+    const mimeType = mime.contentType(fileId.split(".").pop()) || "application/octet-stream";
+    const size = response.ContentLength?.toString() || "0";
+    this.logger.debug(
+      `File downloaded: shareId=${shareId} fileId=${fileId} fileName="${fileName}" size=${size} mimeType=${mimeType}`
+    );
+
     return {
       metaData: {
         id: fileId,
-        size: response.ContentLength?.toString() || "0",
+        size,
         name: fileName,
         shareId: shareId,
         createdAt: response.LastModified || new Date(),
-        mimeType:
-          mime.contentType(fileId.split(".").pop()) ||
-          "application/octet-stream",
+        mimeType,
       },
       file: response.Body as Readable,
     } as File;
@@ -213,13 +227,18 @@ export class S3FileService {
         }),
       );
     } catch (error) {
+      this.logger.error(error);
       throw new Error("Could not delete file from S3");
     }
 
     await this.prisma.file.delete({ where: { id: fileId } });
+    this.logger.debug(
+      `File deleted: shareId=${shareId} fileId=${fileMetaData.id} fileName="${fileMetaData.name}" size=${fileMetaData.size}`
+    );
   }
 
   async deleteAllFiles(shareId: string) {
+    this.logger.debug(`Delete all files requested: shareId=${shareId}`);
     const prefix = `${this.getS3Path()}${shareId}/`;
     const s3Instance = this.getS3Instance();
 
@@ -251,6 +270,7 @@ export class S3FileService {
         }),
       );
     } catch (error) {
+      this.logger.error(error);
       throw new Error("Could not delete all files from S3");
     }
   }

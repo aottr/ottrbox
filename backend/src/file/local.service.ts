@@ -4,6 +4,7 @@ import {
   HttpStatus,
   Injectable,
   InternalServerErrorException,
+  Logger,
   NotFoundException,
 } from "@nestjs/common";
 import * as crypto from "crypto";
@@ -18,10 +19,13 @@ import { Readable } from "stream";
 
 @Injectable()
 export class LocalFileService {
+
+  private readonly logger = new Logger(LocalFileService.name);
+
   constructor(
     private prisma: PrismaService,
     private config: ConfigService,
-  ) {}
+  ) { }
 
   async create(
     data: string,
@@ -29,10 +33,21 @@ export class LocalFileService {
     file: { id?: string; name: string },
     shareId: string,
   ) {
+    const originalFileId = file.id;
     if (!file.id) {
       file.id = crypto.randomUUID();
+      this.logger.debug(
+        `Upload started: shareId=${shareId} fileId=${file.id} fileName="${file.name}" note="generated fileId"`
+      );
     } else if (!isValidUUID(file.id)) {
+      this.logger.warn(
+        `Invalid fileId format on upload: shareId=${shareId} fileId="${originalFileId}"`
+      );
       throw new BadRequestException("Invalid file ID format");
+    } else {
+      this.logger.debug(
+        `Upload continued: shareId=${shareId} fileId=${file.id} fileName="${file.name}"`
+      );
     }
 
     const share = await this.prisma.share.findUnique({
@@ -40,8 +55,10 @@ export class LocalFileService {
       include: { files: true, reverseShare: true },
     });
 
-    if (share.uploadLocked)
+    if (share.uploadLocked) {
+      this.logger.warn(`Upload rejected, share completed: shareId=${shareId} fileId=${file.id}`);
       throw new BadRequestException("Share is already completed");
+    }
 
     let diskFileSize: number;
     try {
@@ -56,12 +73,16 @@ export class LocalFileService {
     const chunkSize = this.config.get("share.chunkSize");
     const expectedChunkIndex = Math.ceil(diskFileSize / chunkSize);
 
-    if (expectedChunkIndex != chunk.index)
+    if (expectedChunkIndex != chunk.index) {
+      this.logger.warn(
+        `Unexpected chunk index: shareId=${shareId} fileId=${file.id} fileName="${file.name}" expected=${expectedChunkIndex} received=${chunk.index}`
+      );
       throw new BadRequestException({
         message: "Unexpected chunk received",
         error: "unexpected_chunk_index",
         expectedChunkIndex,
       });
+    }
 
     const buffer = Buffer.from(data, "base64");
 
@@ -69,6 +90,9 @@ export class LocalFileService {
     const space = await fs.statfs(SHARE_DIRECTORY);
     const availableSpace = space.bavail * space.bsize;
     if (availableSpace < buffer.byteLength) {
+      this.logger.error(
+        `Insufficient disk space: shareId=${shareId} fileId=${file.id} need=${buffer.byteLength} available=${availableSpace}`
+      );
       throw new InternalServerErrorException("Not enough space on the server");
     }
 
@@ -97,6 +121,9 @@ export class LocalFileService {
     );
 
     const isLastChunk = chunk.index == chunk.total - 1;
+    this.logger.debug(
+      `Chunk appended: shareId=${shareId} fileId=${file.id} fileName="${file.name}" chunkIndex=${chunk.index} chunkTotal=${chunk.total} last=${isLastChunk}`
+    );
     if (isLastChunk) {
       await fs.rename(
         `${SHARE_DIRECTORY}/${shareId}/${file.id}.tmp-chunk`,
@@ -113,8 +140,10 @@ export class LocalFileService {
           share: { connect: { id: shareId } },
         },
       });
+      this.logger.debug(
+        `File uploaded: shareId=${shareId} fileId=${file.id} fileName="${file.name}" size=${fileSize} mimeType=${mime.contentType(file.name.split(".").pop() ?? "") || false}`
+      );
     }
-
     return file;
   }
 
@@ -126,6 +155,10 @@ export class LocalFileService {
     if (!fileMetaData) throw new NotFoundException("File not found");
 
     const file = createReadStream(`${SHARE_DIRECTORY}/${shareId}/${fileId}`);
+
+    this.logger.debug(
+      `File downloaded: shareId=${shareId} fileId=${fileMetaData.id} fileName="${fileMetaData.name}" size=${fileMetaData.size} mimeType=${mime.contentType(fileMetaData.name.split(".").pop() ?? "") || false}`
+    );
 
     return {
       metaData: {
@@ -147,9 +180,13 @@ export class LocalFileService {
     await fs.unlink(`${SHARE_DIRECTORY}/${shareId}/${fileId}`);
 
     await this.prisma.file.delete({ where: { id: fileId } });
+    this.logger.debug(
+      `File deleted: shareId=${shareId} fileId=${fileMetaData.id} fileName="${fileMetaData.name}" size=${fileMetaData.size}`
+    );
   }
 
   async deleteAllFiles(shareId: string) {
+    this.logger.debug(`Delete all files requested: shareId=${shareId}`);
     await fs.rm(`${SHARE_DIRECTORY}/${shareId}`, {
       recursive: true,
       force: true,
