@@ -1,3 +1,24 @@
+## [1.14.2](https://github.com/aottr/ottrbox/compare/v1.14.0...v1.14.2) (2025-08-09)
+
+
+### Features
+
+* extend backend debug logging ([54fd77f](https://github.com/aottr/ottrbox/commit/54fd77fc41d3f4d372287149f922ed0b9a889d27)), closes [#8](https://github.com/aottr/ottrbox/issues/8)
+* improve table props and loading state ([5ee3fdf](https://github.com/aottr/ottrbox/commit/5ee3fdf303014a07ef8cd585a8cfcb47faed5abd))
+* migrate share view to tanstack-query, fix sorting ([3680888](https://github.com/aottr/ottrbox/commit/3680888b1741cfcacee67f866c5ecde6874ec915))
+* migrate shares and reverseShares to tanstack-query ([8944403](https://github.com/aottr/ottrbox/commit/8944403eee6be9d6bcdbb1591fc279e2f4cb29ef))
+* optimize navigation for mobile view ([2ea9d88](https://github.com/aottr/ottrbox/commit/2ea9d88612b4e320113d154db3cdb86926da1892)), closes [#2](https://github.com/aottr/ottrbox/issues/2)
+* remove additional upload button ([0e7dbfa](https://github.com/aottr/ottrbox/commit/0e7dbfa12f5ff8cb1495cb1c803bb33a5f317efa))
+* revalidate cache after upload for share edit ([e01cdd0](https://github.com/aottr/ottrbox/commit/e01cdd02b7fcc431fc48ea0e8b28a9efb949f14c))
+
+
+### Bug Fixes
+
+* label for sender name config ([979dc53](https://github.com/aottr/ottrbox/commit/979dc532e581cc0371354058201f2e9db7157140))
+* restrict init user creation to the first admin ([05258ee](https://github.com/aottr/ottrbox/commit/05258ee1eb961500ed14a22eac17c3829dfe278f)), closes [#7](https://github.com/aottr/ottrbox/issues/7)
+* return correct error message on edit-access without permission ([998075d](https://github.com/aottr/ottrbox/commit/998075ddda717f78c1bc703015e769cd641be678))
+* share invalid error after last reversed share entry [#3](https://github.com/aottr/ottrbox/issues/3) ([10c20e6](https://github.com/aottr/ottrbox/commit/10c20e6b061149f54bef0e7135d3258362207cbe))
+
 ## [1.14.1](https://github.com/aottr/ottrbox/compare/v1.14.0...v1.14.1) (2025-07-23)
 
 
