@@ -14,6 +14,7 @@ export type AdminConfig = Config & {
   name: string;
   updatedAt: Date;
   secret: boolean;
+  experimental: boolean;
   description: string;
   obscured: boolean;
   allowEdit: boolean;

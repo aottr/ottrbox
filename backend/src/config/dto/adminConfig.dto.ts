@@ -9,6 +9,9 @@ export class AdminConfigDTO extends ConfigDTO {
   secret: boolean;
 
   @Expose()
+  experimental: boolean
+
+  @Expose()
   defaultValue: string;
 
   @Expose()

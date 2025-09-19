@@ -157,6 +157,7 @@ model Config {
   obscured     Boolean @default(false)
   secret       Boolean @default(true)
   locked       Boolean @default(false)
+  experimental Boolean @default(false)
   order        Int
 
   @@id([name, category])

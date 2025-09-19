@@ -105,6 +105,7 @@ export const configVariables = {
       type: "boolean",
       defaultValue: "false",
       secret: false,
+      experimental: true,
     },
     replyToEmail: {
       type: "string",
