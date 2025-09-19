@@ -1,6 +1,7 @@
 import {
   Alert,
   AppShell,
+  Badge,
   Box,
   Button,
   Container,
@@ -164,6 +165,7 @@ export default function AppShellDemo() {
                             configVariable.key,
                           )}`}
                         />
+                        {configVariable.experimental && <Badge color="yellow" size="sm" variant="outline" style={{ marginLeft: "5px" }}>Beta</Badge>}
                       </Title>
 
                       <Text
