@@ -53,6 +53,10 @@ const getMyShares = async (): Promise<MyShare[]> => {
   return (await api.get("shares")).data;
 };
 
+const getStoredRecipients = async (): Promise<Array<string>> => {
+  return (await api.get("shares/recipients")).data;
+}
+
 const getShareToken = async (id: string, password?: string) => {
   await api.post(`/shares/${id}/token`, { password });
 };
@@ -162,4 +166,5 @@ export default {
   createReverseShare,
   getMyReverseShares,
   removeReverseShare,
+  getStoredRecipients
 };

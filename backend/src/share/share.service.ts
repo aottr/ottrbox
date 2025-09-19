@@ -7,7 +7,7 @@ import {
   NotFoundException,
 } from "@nestjs/common";
 import { JwtService, JwtSignOptions } from "@nestjs/jwt";
-import { Share, User } from "@prisma/client";
+import { Prisma, Share, User } from "@prisma/client";
 import * as archiver from "archiver";
 import * as argon from "argon2";
 import * as fs from "fs";
@@ -298,6 +298,28 @@ export class ShareService {
         size: share.files.reduce((acc, file) => acc + parseInt(file.size), 0),
       };
     });
+  }
+
+  async getStoredRecipientsByUser(userId: string, query?: string) {
+    const recipients = await this.prisma.shareRecipient.findMany({
+      where: {
+        share: {
+          creatorId: userId
+        },
+        email: {
+          contains: query,
+        }
+      },
+      orderBy: {
+        email: "asc"
+      },
+      select: {
+        email: true
+      },
+      distinct: Prisma.ShareRecipientScalarFieldEnum.email
+    });
+
+    return recipients.map(recipient => recipient.email);
   }
 
   async getSharesByUser(userId: string) {
