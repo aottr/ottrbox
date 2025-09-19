@@ -467,6 +467,10 @@ export default {
     "Enable email recipient sharing",
   "admin.config.email.enable-share-email-recipients.description":
     "Whether to allow email sharing with recipients. Only enable this if SMTP is activated.",
+  "admin.config.email.enable-share-email-past-recipients":
+    "Enable retrieal of past recipients",
+  "admin.config.email.enable-share-email-past-recipients.description":
+    "Whether to allow retrieval of past recipients in shares. Only enable this if SMTP is activated.",
   "admin.config.email.reply-to-email": "Reply to email",
   "admin.config.email.reply-to-email.description":
     "(Optional) The email address which should be used as the reply-to address for emails sent. If not set, the default email address will be used.",
