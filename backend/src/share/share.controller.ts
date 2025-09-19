@@ -51,6 +51,12 @@ export class ShareController {
     );
   }
 
+  @Get("recipients")
+  @UseGuards(JwtGuard)
+  async getStoredRecipients(@GetUser() user: User) {
+    return await this.shareService.getStoredRecipientsByUser(user.id);
+  }
+
   @Get(":id")
   @UseGuards(ShareSecurityGuard)
   async get(@Param("id") id: string) {

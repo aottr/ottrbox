@@ -46,6 +46,7 @@ const showCreateUploadModal = (
   },
   files: FileUpload[],
   uploadCallback: (createShare: CreateShare, files: FileUpload[]) => void,
+  pastRecipients: string[] = [],
 ) => {
   const t = translateOutsideContext();
 
@@ -69,6 +70,7 @@ const showCreateUploadModal = (
         options={options}
         files={files}
         uploadCallback={uploadCallback}
+        pastRecipients={pastRecipients}
       />
     ),
   });
@@ -105,6 +107,7 @@ const CreateUploadModalBody = ({
   uploadCallback,
   files,
   options,
+  pastRecipients = [],
 }: {
   files: FileUpload[];
   uploadCallback: (createShare: CreateShare, files: FileUpload[]) => void;
@@ -116,6 +119,7 @@ const CreateUploadModalBody = ({
     maxExpiration: Timespan;
     shareIdLength: number;
   };
+  pastRecipients?: string[];
 }) => {
   const modals = useModals();
   const t = useTranslate();
@@ -148,6 +152,8 @@ const CreateUploadModalBody = ({
       .transform((value) => value || undefined)
       .min(1),
   });
+
+  const [storedRecipients, setStoredRecipients] = useState<string[]>(pastRecipients);
 
   const form = useForm({
     initialValues: {
@@ -385,7 +391,7 @@ const CreateUploadModalBody = ({
                 </Accordion.Control>
                 <Accordion.Panel>
                   <MultiSelect
-                    data={form.values.recipients}
+                    data={storedRecipients}
                     placeholder={t("upload.modal.accordion.email.placeholder")}
                     searchable
                     creatable
@@ -399,6 +405,7 @@ const CreateUploadModalBody = ({
                           t("upload.modal.accordion.email.invalid-email"),
                         );
                       } else {
+                        setStoredRecipients((prev) => [...prev, query]);
                         form.setFieldError("recipients", null);
                         form.setFieldValue("recipients", [
                           ...form.values.recipients,

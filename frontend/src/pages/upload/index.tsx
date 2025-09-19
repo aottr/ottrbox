@@ -19,6 +19,7 @@ import { FileUpload } from "../../types/File.type";
 import { CreateShare, Share } from "../../types/share.type";
 import toast from "../../utils/toast.util";
 import { useRouter } from "next/router";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 const promiseLimit = pLimit(3);
 let errorToastShown = false;
@@ -37,6 +38,8 @@ const Upload = ({
   const router = useRouter();
   const t = useTranslate();
 
+  const queryClient = useQueryClient();
+
   const { user } = useUser();
   const config = useConfig();
   const [files, setFiles] = useState<FileUpload[]>([]);
@@ -46,6 +49,16 @@ const Upload = ({
     message: t("upload.notify.confirm-leave"),
     enabled: isUploading,
   });
+
+  const { data: pastRecipients } = useQuery({
+    queryKey: ["share.pastRecipients"],
+    queryFn: () => shareService.getStoredRecipients(),
+    enabled: !isReverseShare,
+    refetchInterval: Infinity,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    refetchOnMount: false,
+  })
 
   const chunkSize = useRef(parseInt(config.get("share.chunkSize")));
 
@@ -148,6 +161,7 @@ const Upload = ({
       },
       files,
       uploadFiles,
+      pastRecipients,
     );
   };
 
@@ -193,6 +207,9 @@ const Upload = ({
         .then((share) => {
           setisUploading(false);
           showCompletedUploadModal(modals, share);
+          queryClient.invalidateQueries({
+            queryKey: ["share.pastRecipients"],
+          })
           setFiles([]);
         })
         .catch(() => toast.error(t("upload.notify.generic-error")));
