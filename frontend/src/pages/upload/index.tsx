@@ -50,10 +50,14 @@ const Upload = ({
     enabled: isUploading,
   });
 
+  const enableRecipientRetrieval = !isReverseShare
+    && config.get("email.enableShareEmailRecipients")
+    && config.get("email.enableShareEmailPastRecipients");
+
   const { data: pastRecipients } = useQuery({
     queryKey: ["share.pastRecipients"],
     queryFn: () => shareService.getStoredRecipients(),
-    enabled: !isReverseShare,
+    enabled: enableRecipientRetrieval,
     refetchInterval: Infinity,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,

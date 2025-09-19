@@ -101,6 +101,11 @@ export const configVariables = {
       defaultValue: "false",
       secret: false,
     },
+    enableShareEmailPastRecipients: {
+      type: "boolean",
+      defaultValue: "false",
+      secret: false,
+    },
     replyToEmail: {
       type: "string",
       secret: false,
