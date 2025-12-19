@@ -124,7 +124,6 @@ const Share = ({ shareId }: { shareId: string }) => {
 
         {share?.files.length > 1 && <DownloadAllButton shareId={shareId} />}
       </Group>
-
       <FileList
         files={share?.files || []}
         share={share}

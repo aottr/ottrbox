@@ -1,16 +1,21 @@
 import {
   ActionIcon,
   Box,
+  Button,
   Group,
+  SimpleGrid,
   Skeleton,
   Stack,
   Table,
   TextInput,
+  Image,
+  SegmentedControl,
+  Center,
 } from "@mantine/core";
 import { useClipboard } from "@mantine/hooks";
 import { useModals } from "@mantine/modals";
 import { useMemo, useState } from "react";
-import { TbDownload, TbEye, TbLink } from "react-icons/tb";
+import { TbDownload, TbEye, TbLayoutGrid, TbLayoutList, TbLink } from "react-icons/tb";
 import { FormattedMessage } from "react-intl";
 import useTranslate from "../../hooks/useTranslate.hook";
 import shareService from "../../services/share.service";
@@ -20,6 +25,7 @@ import { byteToHumanSizeString } from "../../utils/fileSize.util";
 import toast from "../../utils/toast.util";
 import TableSortIcon, { TableSort } from "../core/SortIcon";
 import showFilePreviewModal from "./modals/showFilePreviewModal";
+import { ImagePreview } from "./previews/ImagePreview";
 
 const FileList = ({
   files,
@@ -38,6 +44,7 @@ const FileList = ({
     property: "name",
     direction: "desc",
   });
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
   const sortedFiles = useMemo(() => {
     if (files && sort.property) {
@@ -78,7 +85,33 @@ const FileList = ({
 
   return (
     <Box sx={{ display: "block", overflowX: "auto" }}>
-      <Table>
+      <Group position="right" mb="md">
+      <SegmentedControl
+        value={viewMode}
+        onChange={(value) => setViewMode(value as "grid" | "list")}
+        data={[
+          {
+            label: (
+              <Center>
+                <TbLayoutList size="1rem" />
+                <Box ml={10}>List</Box>
+              </Center>
+            ), value: "list"
+          },
+          {
+            label: (
+              <Center>
+                <TbLayoutGrid size="1rem" />
+                <Box ml={10}>Grid</Box>
+              </Center>
+            ), value: "grid"
+          }]}
+        />
+      </Group>
+      {viewMode === "grid" && <SimpleGrid cols={3}>
+        {sortedFiles.map((file) => (<ImagePreview key={file.id} shareId={share!.id} fileId={file.id} />))}
+      </SimpleGrid>}
+      {viewMode === "list" && <Table>
         <thead>
           <tr>
             <th>
@@ -136,7 +169,7 @@ const FileList = ({
               </tr>
             ))}
         </tbody>
-      </Table>
+      </Table>}
     </Box>
   );
 };
