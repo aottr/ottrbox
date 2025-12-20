@@ -165,6 +165,7 @@ export default {
   "account.reverseShare.expires-on": "Toto opačné sdílení vyprší {expiration}.",
   "account.reverseShares.table.no-shares": "Zatím nebyla vytvořena žádná sdílení",
   "account.reverseShares.table.count.singular": "sdílení",
+  "account.reverseShares.table.public-access": "Veřejný přístup",
   "account.reverseShares.table.count.plural": "sdílení",
   "account.reverseShares.table.shares": "Sdílení",
   "account.reverseShares.table.remaining": "Zbývající použití",
@@ -278,6 +279,9 @@ export default {
   "share.error.not-found.description": "Sdílení, které hledáte, neexistuje.",
   "share.error.access-denied.title": "Soukromé sdílení",
   "share.error.access-denied.description": "Aktuální účet nemá oprávnění k přístupu k tomuto sdílení",
+  "share.error.private-reverse-share.title": "Přístup zamítnut",
+  "share.error.private-reverse-share.description":
+    "K tomuto sdílení má přístup pouze tvůrce tohoto zpětného sdílení",
   "share.modal.password.title": "Heslo vyžadováno",
   "share.modal.password.description": "Zadejte prosím heslo pro přístup k tomuto sdíleni.",
   "share.modal.password": "Heslo",

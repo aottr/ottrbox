@@ -165,6 +165,7 @@ export default {
   "account.reverseShare.expires-on": "이 역방향 공유는 {expiration} 에 만료됩니다.",
   "account.reverseShares.table.no-shares": "아직 생성된 공유가 없습니다.",
   "account.reverseShares.table.count.singular": "공유",
+  "account.reverseShares.table.public-access": "공개 액세스",
   "account.reverseShares.table.count.plural": "공유",
   "account.reverseShares.table.shares": "공유",
   "account.reverseShares.table.remaining": "남은 링크 사용 횟수",
@@ -278,6 +279,9 @@ export default {
   "share.error.not-found.description": "당신이 찾는 공유는 존재하지 않습니다.",
   "share.error.access-denied.title": "Private share",
   "share.error.access-denied.description": "The current account does not have permission to access this share",
+  "share.error.private-reverse-share.title": "액세스 거부",
+  "share.error.private-reverse-share.description":
+    "이 역방향 공유의 생성자만 이 공유에 액세스할 수 있습니다",
   "share.modal.password.title": "비밀번호 필요",
   "share.modal.password.description": "Please enter the password to access this share.",
   "share.modal.password": "비밀번호",

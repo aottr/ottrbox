@@ -131,6 +131,8 @@ export default {
   "account.shares.modal.share-link": "Freigabe teilen",
   "account.shares.modal.delete.title": "Freigabe löschen: {share}",
   "account.shares.modal.delete.description": "Möchtest du diese Freigabe wirklich löschen?",
+  "account.shares.notify.deleted-success": "Freigabe erfolgreich gelöscht",
+  "account.shares.notify.delete-fail": "Freigabe konnte nicht gelöscht werden",
   // END /account/shares
   // /account/reverseShares
   "account.reverseShares.title": "Datei Anfragen",
@@ -165,11 +167,13 @@ export default {
   "account.reverseShare.expires-on": "Diese externe Freigabe wird am {expiration} ablaufen.",
   "account.reverseShares.table.no-shares": "Noch keine Freigaben erstellt",
   "account.reverseShares.table.count.singular": "Freigabe",
+  "account.reverseShares.table.public-access": "Öffentlicher Zugriff",
   "account.reverseShares.table.count.plural": "Freigaben",
   "account.reverseShares.table.shares": "Freigaben",
   "account.reverseShares.table.remaining": "Verbleibende Verwendungen",
   "account.reverseShares.table.max-size": "Maximale Freigabegröße",
   "account.reverseShares.table.expires": "Läuft ab am",
+  "account.reverseShares.table.password-protected": "Passwortgeschützt",
   "account.reverseShares.modal.reverse-share-link": "Link zu externer Freigabe",
   "account.reverseShares.modal.delete.title": "Externe Freigabe löschen",
   "account.reverseShares.modal.delete.description": "Möchtest du diese externe Freigabe wirklich löschen? In diesem Fall werden auch hiermit verbundene Freigaben gelöscht.",
@@ -278,6 +282,9 @@ export default {
   "share.error.not-found.description": "Die gesuchte Freigabe existiert nicht.",
   "share.error.access-denied.title": "Private Freigabe",
   "share.error.access-denied.description": "Das aktuelle Konto hat keine Berechtigung, um auf diese Freigabe zuzugreifen",
+  "share.error.private-reverse-share.title": "Zugriff verweigert",
+  "share.error.private-reverse-share.description":
+    "Nur der Ersteller dieser Dateianfrage kann auf diese Freigabe zugreifen",
   "share.modal.password.title": "Passwort erforderlich",
   "share.modal.password.description": "Bitte gib das Passwort ein, um auf diese Freigabe zuzugreifen.",
   "share.modal.password": "Passwort",
@@ -337,6 +344,12 @@ export default {
   "admin.config.email.enable-share-email-recipients.description": "Gibt an, ob das Teilen von E-Mails mit Empfängern erlaubt werden soll. Aktiviere dies nur, wenn SMTP aktiviert ist.",
   "admin.config.email.enable-share-email-past-recipients": "Erlaube das Abfragen vergangener E-Mail Freigaben",
   "admin.config.email.enable-share-email-past-recipients.description": "Gibt an, ob beim Teilen einer Freigabe die E-Mail-Adressen der bereits freigegebenen Dateien abgefragt werden sollen. Aktiviere dies nur, wenn SMTP aktiviert ist.",
+  "admin.config.email.reply-to-email": "Antwort an E-Mail",
+  "admin.config.email.reply-to-email.description":
+    "(Optional) Die E-Mail-Adresse, die als Antwort-an Adresse für gesendete E-Mails verwendet werden soll. Wenn nicht gesetzt, wird die Standard-E-Mail-Adresse verwendet.",
+  "admin.config.email.sender-name": "Absendername",
+  "admin.config.email.sender-name.description":
+    "(Optional) Wenn dies gesetzt wird, wird der Standard-Absendername überschrieben. Der Anwendungsname wird verwendet, wenn dies nicht gesetzt ist.",
   "admin.config.email.share-recipients-subject": "Betreff für Freigabe-Empfänger",
   "admin.config.email.share-recipients-subject.description": "Betreff der E-Mail, die an die Freigabe-Empfänger gesendet wird.",
   "admin.config.email.share-recipients-message": "Nachricht für Freigabe-Empfänger",

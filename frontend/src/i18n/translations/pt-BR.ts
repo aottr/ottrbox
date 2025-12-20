@@ -131,6 +131,8 @@ export default {
   "account.shares.modal.share-link": "Link do compartilhamento",
   "account.shares.modal.delete.title": "Excluir o compartilhamento {share}",
   "account.shares.modal.delete.description": "Tem certeza que deseja excluir este compartilhamento?",
+  "account.shares.notify.deleted-success": "Compartilhamento excluído com sucesso",
+  "account.shares.notify.delete-fail": "Não foi possível excluir o compartilhamento",
   // END /account/shares
   // /account/reverseShares
   "account.reverseShares.title": "Compartilhamentos reversos",
@@ -165,6 +167,7 @@ export default {
   "account.reverseShare.expires-on": "Este compartilhamento reverso irá expirar em {expiration}.",
   "account.reverseShares.table.no-shares": "Nenhum compartilhamento criado ainda",
   "account.reverseShares.table.count.singular": "compartilhar",
+  "account.reverseShares.table.public-access": "Acesso público",
   "account.reverseShares.table.count.plural": "compartilhamentos",
   "account.reverseShares.table.shares": "Compartilhamentos",
   "account.reverseShares.table.remaining": "Usos restantes",
@@ -278,6 +281,9 @@ export default {
   "share.error.not-found.description": "O compartilhamento que você procura não existe.",
   "share.error.access-denied.title": "Compartilhamento privado",
   "share.error.access-denied.description": "A conta atual não tem permissão para acessar este compartilhamento",
+  "share.error.private-reverse-share.title": "Acesso negado",
+  "share.error.private-reverse-share.description":
+    "Apenas o criador deste compartilhamento reverso pode acessar este compartilhamento",
   "share.modal.password.title": "Senha necessária",
   "share.modal.password.description": "Por favor, digite a senha para acessar este compartilhamento.",
   "share.modal.password": "Senha",
@@ -335,6 +341,15 @@ export default {
   "admin.config.cache.redis-url.description": "Url para conectar à instância de Redis usada para cache.",
   "admin.config.email.enable-share-email-recipients": "Ativar compartilhamento por email",
   "admin.config.email.enable-share-email-recipients.description": "Se deseja permitir o compartilhamento por e-mail com destinatários. Só ative isto se o SMTP estiver ativado.",
+  "admin.config.email.enable-share-email-past-recipients": "Ativar recuperação de destinatários anteriores",
+  "admin.config.email.enable-share-email-past-recipients.description":
+    "Se permite recuperar destinatários anteriores em compartilhamentos. Só ative isto se o SMTP estiver ativado.",
+  "admin.config.email.reply-to-email": "Responder para email",
+  "admin.config.email.reply-to-email.description":
+    "(Opcional) O endereço de email que deve ser usado como endereço de resposta para emails enviados. Se não definido, o endereço de email padrão será usado.",
+  "admin.config.email.sender-name": "Nome do remetente",
+  "admin.config.email.sender-name.description":
+    "(Opcional) Definir isso substituirá o nome do remetente padrão. O nome do aplicativo será usado se não for definido.",
   "admin.config.email.share-recipients-subject": "Assunto dos destinatários do compartilhamento",
   "admin.config.email.share-recipients-subject.description": "Assunto do e-mail enviado para os destinatários do compartilhamento.",
   "admin.config.email.share-recipients-message": "Assunto dos destinatários do compartilhamento",

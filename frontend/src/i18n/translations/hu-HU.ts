@@ -165,6 +165,7 @@ export default {
   "account.reverseShare.expires-on": "A fordított megosztás lejárata: {expiration}.",
   "account.reverseShares.table.no-shares": "Még nincsenek megosztások",
   "account.reverseShares.table.count.singular": "megosztás",
+  "account.reverseShares.table.public-access": "Nyilvános hozzáférés",
   "account.reverseShares.table.count.plural": "megosztás",
   "account.reverseShares.table.shares": "Megosztások",
   "account.reverseShares.table.remaining": "Fennmaradó alkalmak",
@@ -278,6 +279,9 @@ export default {
   "share.error.not-found.description": "A keresett megosztás nem létezik.",
   "share.error.access-denied.title": "Privát megosztás",
   "share.error.access-denied.description": "Ez a fiók nem rendelkezik jogosultsággal a megosztás eléréséhez",
+  "share.error.private-reverse-share.title": "Hozzáférés megtagadva",
+  "share.error.private-reverse-share.description":
+    "Csak ennek a fordított megosztásnak a készítője férhet hozzá ehhez a megosztáshoz",
   "share.modal.password.title": "Jelszó szükséges",
   "share.modal.password.description": "Please enter the password to access this share.",
   "share.modal.password": "Jelszó",

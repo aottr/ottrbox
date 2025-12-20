@@ -131,6 +131,8 @@ export default {
   "account.shares.modal.share-link": "Deel link",
   "account.shares.modal.delete.title": "Share verwijderd: {share}",
   "account.shares.modal.delete.description": "Weet u zeker dat u deze share wilt verwijderen?",
+  "account.shares.notify.deleted-success": "Share succesvol verwijderd",
+  "account.shares.notify.delete-fail": "Kon share niet verwijderen",
   // END /account/shares
   // /account/reverseShares
   "account.reverseShares.title": "Omgekeerde share",
@@ -165,11 +167,13 @@ export default {
   "account.reverseShare.expires-on": "Dit omgekeerde share verloopt op {expiration}.",
   "account.reverseShares.table.no-shares": "Nog geen omgekeerde share aangemaakt",
   "account.reverseShares.table.count.singular": "deel",
+  "account.reverseShares.table.public-access": "Openbare toegang",
   "account.reverseShares.table.count.plural": "delen",
   "account.reverseShares.table.shares": "Delen",
   "account.reverseShares.table.remaining": "Nog te gebruiken",
   "account.reverseShares.table.max-size": "Maximale sharegrootte",
   "account.reverseShares.table.expires": "Verloopt op",
+  "account.reverseShares.table.password-protected": "Wachtwoord beveiligd",
   "account.reverseShares.modal.reverse-share-link": "Omgekeerde share link",
   "account.reverseShares.modal.delete.title": "Omgekeerde share verwijderen",
   "account.reverseShares.modal.delete.description": "Weet u zeker dat u deze omgekeerde share wilt verwijderen? Als u dit doet, worden de bijbehorende bestanden ook verwijderd.",
@@ -278,6 +282,9 @@ export default {
   "share.error.not-found.description": "De share die u zoekt kan niet gevonden worden.",
   "share.error.access-denied.title": "Private share",
   "share.error.access-denied.description": "Dit account heeft geen toestemming om toegang te krijgen tot deze share",
+  "share.error.private-reverse-share.title": "Toegang geweigerd",
+  "share.error.private-reverse-share.description":
+    "Alleen de maker van deze omgekeerde share kan toegang krijgen tot deze share",
   "share.modal.password.title": "Wachtwoord vereist",
   "share.modal.password.description": "Please enter the password to access this share.",
   "share.modal.password": "Wachtwoord",
@@ -335,6 +342,15 @@ export default {
   "admin.config.cache.redis-url.description": "Url to connect to the Redis instance used for caching.",
   "admin.config.email.enable-share-email-recipients": "Enable email recipient sharing",
   "admin.config.email.enable-share-email-recipients.description": "Whether to allow email sharing with recipients. Only enable this if SMTP is activated.",
+  "admin.config.email.enable-share-email-past-recipients": "Inschakelen ophalen van eerdere ontvangers",
+  "admin.config.email.enable-share-email-past-recipients.description":
+    "Of het ophalen van eerdere ontvangers in shares is toegestaan. Schakel dit alleen in als SMTP is geactiveerd.",
+  "admin.config.email.reply-to-email": "Antwoord naar e-mail",
+  "admin.config.email.reply-to-email.description":
+    "(Optioneel) Het e-mailadres dat moet worden gebruikt als antwoord-naar adres voor verzonden e-mails. Als dit niet is ingesteld, wordt het standaard e-mailadres gebruikt.",
+  "admin.config.email.sender-name": "Afzender naam",
+  "admin.config.email.sender-name.description":
+    "(Optioneel) Door dit in te stellen wordt de standaard afzender naam overschreven. De applicatienaam wordt gebruikt als dit niet is ingesteld.",
   "admin.config.email.share-recipients-subject": "Onderwerp van ontvangers' share",
   "admin.config.email.share-recipients-subject.description": "Het onderwerp van de e-mail die wordt verzonden naar de share-ontvangers.",
   "admin.config.email.share-recipients-message": "Bericht voor ontvangers van de share",

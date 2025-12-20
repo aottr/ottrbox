@@ -165,6 +165,7 @@ export default {
   "account.reverseShare.expires-on": "هذه المشاركة العكسية ستنتهي صلاحيتها في {expiration}.",
   "account.reverseShares.table.no-shares": "لم يتم إنشاء أي مشاركة بعد",
   "account.reverseShares.table.count.singular": "مشاركة",
+  "account.reverseShares.table.public-access": "وصول عام",
   "account.reverseShares.table.count.plural": "مشاركات",
   "account.reverseShares.table.shares": "مشاركات",
   "account.reverseShares.table.remaining": "الاستخدامات المتبقية",
@@ -278,6 +279,9 @@ export default {
   "share.error.not-found.description": "المشاركة التي تبحث عنها غير موجودة.",
   "share.error.access-denied.title": "Private share",
   "share.error.access-denied.description": "The current account does not have permission to access this share",
+  "share.error.private-reverse-share.title": "تم رفض الوصول",
+  "share.error.private-reverse-share.description":
+    "يمكن فقط لمنشئ هذا المشاركة العكسية الوصول إلى هذه المشاركة",
   "share.modal.password.title": "كلمة السر مطلوبة",
   "share.modal.password.description": "Please enter the password to access this share.",
   "share.modal.password": "كلمة السر",

@@ -131,6 +131,8 @@ export default {
   "account.shares.modal.share-link": "Enlace",
   "account.shares.modal.delete.title": "Eliminar enlace compartido: {share}",
   "account.shares.modal.delete.description": "¿Seguro que quieres eliminar este compartido?",
+  "account.shares.notify.deleted-success": "Compartición eliminada exitosamente",
+  "account.shares.notify.delete-fail": "No se pudo eliminar el compartido",
   // END /account/shares
   // /account/reverseShares
   "account.reverseShares.title": "Comparticiones inversas",
@@ -165,6 +167,7 @@ export default {
   "account.reverseShare.expires-on": "Esta compartición inversa expirará en {expiration}.",
   "account.reverseShares.table.no-shares": "Todavía no se han creado compartidos",
   "account.reverseShares.table.count.singular": "compartido",
+  "account.reverseShares.table.public-access": "Acceso público",
   "account.reverseShares.table.count.plural": "compartidos",
   "account.reverseShares.table.shares": "Compartidos",
   "account.reverseShares.table.remaining": "Usos restantes",
@@ -278,6 +281,9 @@ export default {
   "share.error.not-found.description": "El compartido que estás buscando no existe.",
   "share.error.access-denied.title": "Compartición privada",
   "share.error.access-denied.description": "La cuenta actual no tiene permiso para acceder a este compartido",
+  "share.error.private-reverse-share.title": "Acceso denegado",
+  "share.error.private-reverse-share.description":
+    "Solo el creador de este compartido inverso puede acceder a este compartido",
   "share.modal.password.title": "Se requiere contraseña",
   "share.modal.password.description": "Por favor, ingresa la contraseña para acceder a este recurso compartido.",
   "share.modal.password": "Contraseña",
@@ -335,6 +341,15 @@ export default {
   "admin.config.cache.redis-url.description": "Url to connect to the Redis instance used for caching.",
   "admin.config.email.enable-share-email-recipients": "Habilitar compartir por correo electrónico",
   "admin.config.email.enable-share-email-recipients.description": "Si desea permitir compartir por correo electrónico. Solo habilita esto si SMTP está activado.",
+  "admin.config.email.enable-share-email-past-recipients": "Habilitar recuperación de destinatarios anteriores",
+  "admin.config.email.enable-share-email-past-recipients.description":
+    "Si se permite recuperar destinatarios anteriores en compartidos. Solo habilita esto si SMTP está activado.",
+  "admin.config.email.reply-to-email": "Responder a correo electrónico",
+  "admin.config.email.reply-to-email.description":
+    "(Opcional) La dirección de correo electrónico que debe usarse como dirección de respuesta para los correos enviados. Si no se establece, se usará la dirección de correo electrónico predeterminada.",
+  "admin.config.email.sender-name": "Nombre del remitente",
+  "admin.config.email.sender-name.description":
+    "(Opcional) Establecer esto sobrescribirá el nombre del remitente predeterminado. Se usará el nombre de la aplicación si no se establece.",
   "admin.config.email.share-recipients-subject": "Asunto destinatario",
   "admin.config.email.share-recipients-subject.description": "Asunto del correo el cual es enviado al destinatario del compartido.",
   "admin.config.email.share-recipients-message": "Mensaje destinatario",

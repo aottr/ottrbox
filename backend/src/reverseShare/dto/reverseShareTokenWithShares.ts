@@ -2,6 +2,7 @@ import { OmitType } from "@nestjs/swagger";
 import { Expose, plainToClass, Type } from "class-transformer";
 import { MyShareDTO } from "src/share/dto/myShare.dto";
 import { ReverseShareDTO } from "./reverseShare.dto";
+import { MyShareSecurityDTO } from "src/share/dto/myShareSecurity.dto";
 
 export class ReverseShareTokenWithShares extends OmitType(ReverseShareDTO, [
   "shareExpiration",
@@ -18,6 +19,10 @@ export class ReverseShareTokenWithShares extends OmitType(ReverseShareDTO, [
 
   @Expose()
   remainingUses: number;
+
+  @Expose()
+  @Type(() => MyShareSecurityDTO)
+  security: MyShareSecurityDTO;
 
   fromList(partial: Partial<ReverseShareTokenWithShares>[]) {
     return partial.map((part) =>

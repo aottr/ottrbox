@@ -165,6 +165,7 @@ export default {
   "account.reverseShare.expires-on": "このファイルリクエストリンクは、{expiration} に期限切れとなります。",
   "account.reverseShares.table.no-shares": "まだファイルがアップロードされていません",
   "account.reverseShares.table.count.singular": "共有",
+  "account.reverseShares.table.public-access": "公開アクセス",
   "account.reverseShares.table.count.plural": "共有",
   "account.reverseShares.table.shares": "共有",
   "account.reverseShares.table.remaining": "残り使用回数",
@@ -278,6 +279,9 @@ export default {
   "share.error.not-found.description": "お探しの共有が見つかりません。",
   "share.error.access-denied.title": "プライベートシェア",
   "share.error.access-denied.description": "現在のアカウントにはこの共有にアクセスする権限がありません",
+  "share.error.private-reverse-share.title": "アクセス拒否",
+  "share.error.private-reverse-share.description":
+    "このリバースシェアの作成者のみがこの共有にアクセスできます",
   "share.modal.password.title": "パスワードが必要です",
   "share.modal.password.description": "この共有にアクセスするにはパスワードを入力してください。",
   "share.modal.password": "パスワード",

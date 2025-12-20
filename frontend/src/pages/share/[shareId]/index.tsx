@@ -80,6 +80,13 @@ const Share = ({ shareId }: { shareId: string }) => {
       }
     } else if (errorData.error == "share_password_required") {
       showEnterPasswordModal(modals, getShareToken);
+    } else if (errorData.error == "private_share") {
+      showErrorModal(
+        modals,
+        t("share.error.access-denied.title"),
+        t("share.error.access-denied.description"),
+        "go-home",
+      );
     } else if (errorData.error == "share_token_required") {
       getShareToken();
     } else {

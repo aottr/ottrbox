@@ -165,6 +165,7 @@ export default {
   "account.reverseShare.expires-on": "Bu karşı paylaşımın süresi {expiration} tarihinde dolacak.",
   "account.reverseShares.table.no-shares": "Henüz paylaşım oluşturulmadı",
   "account.reverseShares.table.count.singular": "paylaşım",
+  "account.reverseShares.table.public-access": "Herkese açık erişim",
   "account.reverseShares.table.count.plural": "paylaşım",
   "account.reverseShares.table.shares": "Paylaşımlar",
   "account.reverseShares.table.remaining": "Kalan kullanım hakkı",
@@ -278,6 +279,9 @@ export default {
   "share.error.not-found.description": "Aradığınız paylaşım mevcut değil.",
   "share.error.access-denied.title": "Özel paylaşım",
   "share.error.access-denied.description": "Mevcut hesabın bu paylaşıma erişim izni yok.",
+  "share.error.private-reverse-share.title": "Erişim reddedildi",
+  "share.error.private-reverse-share.description":
+    "Yalnızca bu ters paylaşımın oluşturucusu bu paylaşıma erişebilir",
   "share.modal.password.title": "Şifre gerekli",
   "share.modal.password.description": "Bu paylaşıma erişmek için lütfen şifreyi girin.",
   "share.modal.password": "Şifre",

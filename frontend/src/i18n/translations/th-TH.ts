@@ -165,6 +165,7 @@ export default {
   "account.reverseShare.expires-on": "ลิงค์นี้จะหมดอายุใน {expiration}.",
   "account.reverseShares.table.no-shares": "ยังไม่มีการสร้างแชร์",
   "account.reverseShares.table.count.singular": "แชร์",
+  "account.reverseShares.table.public-access": "การเข้าถึงสาธารณะ",
   "account.reverseShares.table.count.plural": "แชร์",
   "account.reverseShares.table.shares": "แชร์",
   "account.reverseShares.table.remaining": "เหลืออีก {count} ครั้ง",
@@ -278,6 +279,9 @@ export default {
   "share.error.not-found.description": "การแชร์ที่คุณกำลังมองหาไม่มีอยู่จริง",
   "share.error.access-denied.title": "Private share",
   "share.error.access-denied.description": "The current account does not have permission to access this share",
+  "share.error.private-reverse-share.title": "ปฏิเสธการเข้าถึง",
+  "share.error.private-reverse-share.description":
+    "เฉพาะผู้สร้างการแชร์แบบย้อนกลับนี้เท่านั้นที่สามารถเข้าถึงการแชร์นี้ได้",
   "share.modal.password.title": "ต้องการรหัสผ่าน",
   "share.modal.password.description": "Please enter the password to access this share.",
   "share.modal.password": "รหัสผ่าน",

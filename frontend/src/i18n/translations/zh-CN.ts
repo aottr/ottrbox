@@ -165,6 +165,7 @@ export default {
   "account.reverseShare.expires-on": "这个预留共享将过期于 {expiration}",
   "account.reverseShares.table.no-shares": "当前没有创建任何共享",
   "account.reverseShares.table.count.singular": "共享",
+  "account.reverseShares.table.public-access": "公开访问",
   "account.reverseShares.table.count.plural": "共享",
   "account.reverseShares.table.shares": "共享",
   "account.reverseShares.table.remaining": "剩余使用次数",
@@ -278,6 +279,9 @@ export default {
   "share.error.not-found.description": "共享文件走丢了",
   "share.error.access-denied.title": "私有共享",
   "share.error.access-denied.description": "当前账户没有权限访问此共享",
+  "share.error.private-reverse-share.title": "访问被拒绝",
+  "share.error.private-reverse-share.description":
+    "只有此反向共享的创建者才能访问此共享",
   "share.modal.password.title": "需要密码",
   "share.modal.password.description": "请输入密码以访问此共享。",
   "share.modal.password": "密码",

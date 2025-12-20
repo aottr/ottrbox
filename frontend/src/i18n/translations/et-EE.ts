@@ -165,6 +165,7 @@ export default {
   "account.reverseShare.expires-on": "See tagasijagamine aegub {expiration}.",
   "account.reverseShares.table.no-shares": "Ühtegi jagamist pole veel loodud",
   "account.reverseShares.table.count.singular": "jagamine",
+  "account.reverseShares.table.public-access": "Avalik juurdepääs",
   "account.reverseShares.table.count.plural": "jagamised",
   "account.reverseShares.table.shares": "Jagamised",
   "account.reverseShares.table.remaining": "Järelejäänud kasutuskorrad",
@@ -278,6 +279,9 @@ export default {
   "share.error.not-found.description": "Otsitavat jagamist ei eksisteeri.",
   "share.error.access-denied.title": "Privaatne jagamine",
   "share.error.access-denied.description": "Praegusel kontol puudub luba sellele jagamisele juurde pääseda",
+  "share.error.private-reverse-share.title": "Juurdepääs keelatud",
+  "share.error.private-reverse-share.description":
+    "Sellele jagamisele saab juurde pääseda ainult selle vastupidise jagamise looja",
   "share.modal.password.title": "Parool vajalik",
   "share.modal.password.description": "Palun sisesta parool, et sellele jagamisele juurde pääseda.",
   "share.modal.password": "Parool",

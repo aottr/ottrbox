@@ -165,6 +165,7 @@ export default {
   "account.reverseShare.expires-on": "Αυτός ο αντίστροφος διαμοιρασμός θα λήξει {expiration}.",
   "account.reverseShares.table.no-shares": "Δε δημιουργήθηκαν κοινοποιήσεις ακόμα",
   "account.reverseShares.table.count.singular": "διαμοιρασμός",
+  "account.reverseShares.table.public-access": "Δημόσια πρόσβαση",
   "account.reverseShares.table.count.plural": "διαμοιρασμοί",
   "account.reverseShares.table.shares": "Διαμοιρασμοί",
   "account.reverseShares.table.remaining": "Υπόλοιπες χρήσεις",
@@ -278,6 +279,9 @@ export default {
   "share.error.not-found.description": "Η κοινοποίηση που ψάχνετε δεν υπάρχει.",
   "share.error.access-denied.title": "Ιδιωτική κοινοποίηση",
   "share.error.access-denied.description": "Ο τρέχων λογαριασμός δεν έχει δικαίωμα πρόσβασης σε αυτήν την κοινοποίηση",
+  "share.error.private-reverse-share.title": "Απαγόρευση πρόσβασης",
+  "share.error.private-reverse-share.description":
+    "Μόνο ο δημιουργός αυτής της αντίστροφης κοινοποίησης μπορεί να αποκτήσει πρόσβαση σε αυτήν την κοινοποίηση",
   "share.modal.password.title": "Απαιτείται κωδικός",
   "share.modal.password.description": "Please enter the password to access this share.",
   "share.modal.password": "Κωδικός πρόσβασης",

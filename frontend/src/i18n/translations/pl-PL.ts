@@ -165,6 +165,7 @@ export default {
   "account.reverseShare.expires-on": "To udostępnienie odwrotne wygaśnie dnia {expiration}.",
   "account.reverseShares.table.no-shares": "Nie utworzono jeszcze udostępnień",
   "account.reverseShares.table.count.singular": "udostępnij",
+  "account.reverseShares.table.public-access": "Dostęp publiczny",
   "account.reverseShares.table.count.plural": "udziały",
   "account.reverseShares.table.shares": "Udziały",
   "account.reverseShares.table.remaining": "Pozostało miejsca",
@@ -278,6 +279,9 @@ export default {
   "share.error.not-found.description": "Udział, który szukasz, nie istnieje.",
   "share.error.access-denied.title": "Prywatne udostępnienie",
   "share.error.access-denied.description": "Bieżące konto nie ma uprawnień dostępu do tego udostępnienia",
+  "share.error.private-reverse-share.title": "Dostęp odmówiony",
+  "share.error.private-reverse-share.description":
+    "Tylko twórca tego odwrotnego udostępnienia może uzyskać dostęp do tego udostępnienia",
   "share.modal.password.title": "Wymagane hasło",
   "share.modal.password.description": "Please enter the password to access this share.",
   "share.modal.password": "Hasło",

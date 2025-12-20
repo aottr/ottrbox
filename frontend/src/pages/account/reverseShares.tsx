@@ -9,6 +9,7 @@ import {
   Stack,
   Table,
   Text,
+  ThemeIcon,
   Title,
   Tooltip,
 } from "@mantine/core";
@@ -16,7 +17,7 @@ import { useClipboard } from "@mantine/hooks";
 import { useModals } from "@mantine/modals";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import moment from "moment";
-import { TbInfoCircle, TbLink, TbPlus, TbTrash } from "react-icons/tb";
+import { TbInfoCircle, TbLink, TbLock, TbPlus, TbTrash, TbWorld, TbWorldCancel, TbWorldCheck, TbWorldOff } from "react-icons/tb";
 import { FormattedMessage } from "react-intl";
 import Meta from "../../components/Meta";
 import showReverseShareLinkModal from "../../components/account/showReverseShareLinkModal";
@@ -133,6 +134,9 @@ const MyShares = () => {
                   <FormattedMessage id="account.reverseShares.table.shares" />
                 </th>
                 <th>
+                  <FormattedMessage id="account.reverseShares.table.public-access" />
+                </th>
+                <th>
                   <FormattedMessage id="account.reverseShares.table.remaining" />
                 </th>
                 <th>
@@ -171,7 +175,7 @@ const MyShares = () => {
                           </Accordion.Control>
                           <Accordion.Panel>
                             {reverseShare.shares.map((share) => (
-                              <Group key={share.id} mb={4}>
+                              <Group key={share.id} mb={4} spacing="xs">
                                 <Anchor
                                   href={`${window.location.origin}/share/${share.id}`}
                                   target="_blank"
@@ -180,6 +184,11 @@ const MyShares = () => {
                                     {share.id}
                                   </Text>
                                 </Anchor>
+                                {share.security.passwordProtected && (
+                                  <Tooltip label={t("account.reverseShares.table.password-protected")} withArrow>
+                                    <ThemeIcon color="orange" variant="light"><TbLock size="1rem" /></ThemeIcon>
+                                  </Tooltip>
+                                )}
                                 <ActionIcon
                                   color="victoria"
                                   variant="light"
@@ -206,6 +215,12 @@ const MyShares = () => {
                       </Accordion>
                     )}
                   </td>
+                  <td style={{ textAlign: "center" }}>{reverseShare.publicAccess ? (
+                      <ThemeIcon color="green" variant="light"><TbWorldCheck size="1.2rem" /></ThemeIcon>
+                    ) : (
+                      <ThemeIcon color="red" variant="light"><TbWorldOff size="1.2rem" /></ThemeIcon>
+                    )
+                  }</td>
                   <td>{reverseShare.remainingUses}</td>
                   <td>
                     {byteToHumanSizeString(parseInt(reverseShare.maxShareSize))}

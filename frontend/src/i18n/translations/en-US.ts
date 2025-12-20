@@ -222,11 +222,14 @@ export default {
 
   "account.reverseShares.table.no-shares": "No shares created yet",
   "account.reverseShares.table.count.singular": "share",
+  "account.reverseShares.table.public-access": "Public access",
   "account.reverseShares.table.count.plural": "shares",
   "account.reverseShares.table.shares": "Shares",
   "account.reverseShares.table.remaining": "Remaining uses",
   "account.reverseShares.table.max-size": "Max share size",
   "account.reverseShares.table.expires": "Expires at",
+  "account.reverseShares.table.password-protected": "Password protected",
+
 
   "account.reverseShares.modal.reverse-share-link": "Reverse share link",
 
@@ -381,6 +384,9 @@ export default {
   "share.error.access-denied.title": "Private share",
   "share.error.access-denied.description":
     "The current account does not have permission to access this share",
+  "share.error.private-reverse-share.title": "Access denied",
+  "share.error.private-reverse-share.description":
+    "Only the creator of this reverse share can access this share",
 
   "share.modal.password.title": "Password required",
   "share.modal.password.description":

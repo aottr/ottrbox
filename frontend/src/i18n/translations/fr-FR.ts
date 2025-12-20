@@ -129,8 +129,10 @@ export default {
   "account.shares.table.expiry-never": "Jamais",
   "account.shares.modal.share-informations": "Détails du partage",
   "account.shares.modal.share-link": "Lien de partage",
-  "account.shares.modal.delete.title": "Supprimer le partage : {share}",
+  "account.shares.modal.delete.title": "Supprimer le partage : {share}",
   "account.shares.modal.delete.description": "Voulez-vous vraiment supprimer ce partage ?",
+  "account.shares.notify.deleted-success": "Partage supprimé avec succès",
+  "account.shares.notify.delete-fail": "Impossible de supprimer le partage",
   // END /account/shares
   // /account/reverseShares
   "account.reverseShares.title": "Partages inversés",
@@ -165,11 +167,13 @@ export default {
   "account.reverseShare.expires-on": "Ce partage inversé expirera le {expiration}.",
   "account.reverseShares.table.no-shares": "Aucun partage créé pour le moment",
   "account.reverseShares.table.count.singular": "partage",
+  "account.reverseShares.table.public-access": "Accès public",
   "account.reverseShares.table.count.plural": "partages",
   "account.reverseShares.table.shares": "Partages",
   "account.reverseShares.table.remaining": "Utilisations restantes",
   "account.reverseShares.table.max-size": "Taille maximale du partage",
   "account.reverseShares.table.expires": "Expire le",
+  "account.reverseShares.table.password-protected": "Protégé par mot de passe",
   "account.reverseShares.modal.reverse-share-link": "Lien du partage inversé",
   "account.reverseShares.modal.delete.title": "Supprimer le partage inversé",
   "account.reverseShares.modal.delete.description": "Voulez-vous vraiment supprimer ce partage inversé ? Si vous le faites, les partages qu’il contient seront également supprimés.",
@@ -278,6 +282,9 @@ export default {
   "share.error.not-found.description": "Le partage que vous cherchez n’existe pas.",
   "share.error.access-denied.title": "Partage privé",
   "share.error.access-denied.description": "Le compte actuel n'a pas la permission d'accéder à ce partage",
+  "share.error.private-reverse-share.title": "Accès refusé",
+  "share.error.private-reverse-share.description":
+    "Seul le créateur de ce partage inversé peut accéder à ce partage",
   "share.modal.password.title": "Mot de passe requis",
   "share.modal.password.description": "Veuillez entrer le mot de passe pour accéder à ce partage.",
   "share.modal.password": "Mot de passe",
@@ -335,7 +342,16 @@ export default {
   "admin.config.cache.redis-url.description": "URL de connexion à l’instance de Redis pour servir de cache.",
   "admin.config.email.enable-share-email-recipients": "Activer le partage par courriel",
   "admin.config.email.enable-share-email-recipients.description": "Autoriser ou non le partage de courriels avec les destinataires. N'activer cette option que si SMTP est activé.",
-  "admin.config.email.share-recipients-subject": "Sujet d’un partage",
+  "admin.config.email.enable-share-email-past-recipients": "Activer la récupération des destinataires précédents",
+  "admin.config.email.enable-share-email-past-recipients.description":
+    "Autoriser ou non la récupération des destinataires précédents dans les partages. N'activer cette option que si SMTP est activé.",
+  "admin.config.email.reply-to-email": "Adresse de réponse",
+  "admin.config.email.reply-to-email.description":
+    "(Optionnel) L'adresse courriel qui doit être utilisée comme adresse de réponse pour les courriels envoyés. Si non définie, l'adresse courriel par défaut sera utilisée.",
+  "admin.config.email.sender-name": "Nom de l'expéditeur",
+  "admin.config.email.sender-name.description":
+    "(Optionnel) Définir ceci remplacera le nom d'expéditeur par défaut. Le nom de l'application sera utilisé si ce n'est pas défini.",
+  "admin.config.email.share-recipients-subject": "Sujet d'un partage",
   "admin.config.email.share-recipients-subject.description": "Intitulé du courriel envoyé aux destinataires d’un partage.",
   "admin.config.email.share-recipients-message": "Message d’un partage",
   "admin.config.email.share-recipients-message.description": "Contenu du courriel qui est envoyé aux destinataires du partage. Variables possibles :\n {creator} - Le nom d'utilisateur du créateur du partage\n {creatorEmail} - L'adresse mail du créateur du partage\n {shareUrl} - L'URL du partage\n {desc} - La description du partage\n {expires} - La date d'expiration du partage.\n Ces variables seront remplacées par leur valeur effective.",

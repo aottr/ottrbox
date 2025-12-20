@@ -165,6 +165,7 @@ export default {
   "account.reverseShare.expires-on": "Ta delitev v obratni smeri bo potekla {expiration}.",
   "account.reverseShares.table.no-shares": "Nimate še ustvarjenih delitev",
   "account.reverseShares.table.count.singular": "delitev",
+  "account.reverseShares.table.public-access": "Javni dostop",
   "account.reverseShares.table.count.plural": "delitve",
   "account.reverseShares.table.shares": "Delitve",
   "account.reverseShares.table.remaining": "Preostale uporabe",
@@ -278,6 +279,9 @@ export default {
   "share.error.not-found.description": "Delitev, ki jo iščete ne obstaja.",
   "share.error.access-denied.title": "Private share",
   "share.error.access-denied.description": "The current account does not have permission to access this share",
+  "share.error.private-reverse-share.title": "Dostop zavrnjen",
+  "share.error.private-reverse-share.description":
+    "Samo ustvarjalec tega obratnega deljenja lahko dostopa do tega deljenja",
   "share.modal.password.title": "Zahtevano geslo",
   "share.modal.password.description": "Please enter the password to access this share.",
   "share.modal.password": "Geslo",

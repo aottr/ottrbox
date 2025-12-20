@@ -165,6 +165,7 @@ export default {
   "account.reverseShare.expires-on": "Це зворотне завантаження застаріє {expiration}.",
   "account.reverseShares.table.no-shares": "Немає створених завантажень",
   "account.reverseShares.table.count.singular": "завантаження",
+  "account.reverseShares.table.public-access": "Публічний доступ",
   "account.reverseShares.table.count.plural": "завантаження",
   "account.reverseShares.table.shares": "Завантаження",
   "account.reverseShares.table.remaining": "Залишилося використань",
@@ -278,6 +279,9 @@ export default {
   "share.error.not-found.description": "Сторінка, яку ви шукаєте, не існує.",
   "share.error.access-denied.title": "Приватне завантаження",
   "share.error.access-denied.description": "Поточний акаунт не має дозволу на доступ до цього завантаження",
+  "share.error.private-reverse-share.title": "Доступ заборонено",
+  "share.error.private-reverse-share.description":
+    "Тільки творець цього зворотного завантаження може отримати доступ до цього завантаження",
   "share.modal.password.title": "Потрібен пароль",
   "share.modal.password.description": "Будь ласка, введіть пароль для доступу до цього завантаження.",
   "share.modal.password": "Пароль",

@@ -78,10 +78,19 @@ export class ReverseShareService {
       orderBy: {
         shareExpiration: "desc",
       },
-      include: { shares: { include: { creator: true } } },
+      include: { shares: { include: { creator: true, security: true } } },
     });
 
-    return reverseShares;
+    return reverseShares.map((reverseShare) => ({
+      ...reverseShare,
+      shares: reverseShare.shares.map((share) => ({
+        ...share,
+        security: {
+          maxViews: share.security?.maxViews,
+          passwordProtected: !!share.security?.password,
+        },
+      })),
+    }));
   }
 
   async isValid(reverseShareToken: string) {

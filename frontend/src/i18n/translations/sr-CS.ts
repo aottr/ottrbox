@@ -165,6 +165,7 @@ export default {
   "account.reverseShare.expires-on": "Ovo obrnuto deljenje će isteći {expiration}.",
   "account.reverseShares.table.no-shares": "Još nema kreiranih deljenja",
   "account.reverseShares.table.count.singular": "deljenje",
+  "account.reverseShares.table.public-access": "Јавни приступ",
   "account.reverseShares.table.count.plural": "deljenja",
   "account.reverseShares.table.shares": "Deljenja",
   "account.reverseShares.table.remaining": "Preostala upotreba",
@@ -278,6 +279,9 @@ export default {
   "share.error.not-found.description": "Udeo koji tražite ne postoji.",
   "share.error.access-denied.title": "Privatno deljenje",
   "share.error.access-denied.description": "Trenutni nalog nema dozvolu za pristup ovom deljenju",
+  "share.error.private-reverse-share.title": "Приступ одбијен",
+  "share.error.private-reverse-share.description":
+    "Само креатор овог обрнутог дељења може приступити овом дељењу",
   "share.modal.password.title": "Obavezna lozinka",
   "share.modal.password.description": "Molimo unesite lozinku za pristup ovom deljenju.",
   "share.modal.password": "Lozinka",

@@ -165,6 +165,7 @@ export default {
   "account.reverseShare.expires-on": "Эта обратная загрузка устареет {expiration}.",
   "account.reverseShares.table.no-shares": "Нет созданных загрузок",
   "account.reverseShares.table.count.singular": "загрузка",
+  "account.reverseShares.table.public-access": "Публичный доступ",
   "account.reverseShares.table.count.plural": "загрузки",
   "account.reverseShares.table.shares": "Загрузки",
   "account.reverseShares.table.remaining": "Осталось использований",
@@ -278,6 +279,9 @@ export default {
   "share.error.not-found.description": "Страница, которую вы ищете, не существует.",
   "share.error.access-denied.title": "Приватное доступ",
   "share.error.access-denied.description": "У текущей учетной записи нет разрешения на доступ к этому ресурсу",
+  "share.error.private-reverse-share.title": "Доступ запрещен",
+  "share.error.private-reverse-share.description":
+    "Только создатель этого обратного общего доступа может получить доступ к этому ресурсу",
   "share.modal.password.title": "Требуется пароль",
   "share.modal.password.description": "Пожалуйста, введите пароль для доступа к этому ресурсу.",
   "share.modal.password": "Пароль",

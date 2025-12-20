@@ -165,6 +165,7 @@ export default {
   "account.reverseShare.expires-on": "Denna sammanlagda delning löper ut på {expiration}.",
   "account.reverseShares.table.no-shares": "Inga delningar har skapats ännu",
   "account.reverseShares.table.count.singular": "delning",
+  "account.reverseShares.table.public-access": "Offentlig åtkomst",
   "account.reverseShares.table.count.plural": "delningar",
   "account.reverseShares.table.shares": "Delningar",
   "account.reverseShares.table.remaining": "Återstående användningar",
@@ -278,6 +279,9 @@ export default {
   "share.error.not-found.description": "Delningen du letar efter existerar inte.",
   "share.error.access-denied.title": "Privat delning",
   "share.error.access-denied.description": "Det aktuella kontot har inte behörighet att komma åt denna delning",
+  "share.error.private-reverse-share.title": "Åtkomst nekad",
+  "share.error.private-reverse-share.description":
+    "Endast skaparen av denna omvända delning kan komma åt denna delning",
   "share.modal.password.title": "Lösenord krävs",
   "share.modal.password.description": "Ange lösenordet för att komma åt denna delning.",
   "share.modal.password": "Lösenord",

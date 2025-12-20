@@ -165,6 +165,7 @@ export default {
   "account.reverseShare.expires-on": "This reverse share will expire on {expiration}.",
   "account.reverseShares.table.no-shares": "Chưa tạo chia sẻ nào",
   "account.reverseShares.table.count.singular": "share",
+  "account.reverseShares.table.public-access": "Truy cập công khai",
   "account.reverseShares.table.count.plural": "shares",
   "account.reverseShares.table.shares": "Shares",
   "account.reverseShares.table.remaining": "Remaining uses",
@@ -278,6 +279,9 @@ export default {
   "share.error.not-found.description": "The share you're looking for doesn't exist.",
   "share.error.access-denied.title": "Private share",
   "share.error.access-denied.description": "The current account does not have permission to access this share",
+  "share.error.private-reverse-share.title": "Truy cập bị từ chối",
+  "share.error.private-reverse-share.description":
+    "Chỉ người tạo chia sẻ ngược này mới có thể truy cập chia sẻ này",
   "share.modal.password.title": "Cần mật khẩu để mở khoá",
   "share.modal.password.description": "Please enter the password to access this share.",
   "share.modal.password": "Mật khẩu",

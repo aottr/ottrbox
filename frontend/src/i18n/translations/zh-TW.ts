@@ -165,6 +165,7 @@ export default {
   "account.reverseShare.expires-on": "這個檔案請求將於 {expiration} 過期。",
   "account.reverseShares.table.no-shares": "當前沒有建立任何分享",
   "account.reverseShares.table.count.singular": "分享",
+  "account.reverseShares.table.public-access": "公開存取",
   "account.reverseShares.table.count.plural": "分享",
   "account.reverseShares.table.shares": "分享",
   "account.reverseShares.table.remaining": "剩餘使用次數",
@@ -278,6 +279,9 @@ export default {
   "share.error.not-found.description": "分享檔案遺失了",
   "share.error.access-denied.title": "私人分享",
   "share.error.access-denied.description": "您沒有權限存取此檔案",
+  "share.error.private-reverse-share.title": "存取遭拒",
+  "share.error.private-reverse-share.description":
+    "只有此反向分享的建立者才能存取此分享",
   "share.modal.password.title": "需要密碼",
   "share.modal.password.description": "請輸入密碼取得此分享。",
   "share.modal.password": "密碼",

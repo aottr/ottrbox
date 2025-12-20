@@ -165,6 +165,7 @@ export default {
   "account.reverseShare.expires-on": "Tämä käänteinen jako vanhenee kun on {expiration}.",
   "account.reverseShares.table.no-shares": "Ei vielä luotuja jakoja",
   "account.reverseShares.table.count.singular": "jaa",
+  "account.reverseShares.table.public-access": "Julkinen pääsy",
   "account.reverseShares.table.count.plural": "jaot",
   "account.reverseShares.table.shares": "Jaot",
   "account.reverseShares.table.remaining": "Jäljellä olevat käyttökerrat",
@@ -278,6 +279,9 @@ export default {
   "share.error.not-found.description": "Etsimääsi sivua ei ole olemassa.",
   "share.error.access-denied.title": "Yksityinen jako",
   "share.error.access-denied.description": "The current account does not have permission to access this share",
+  "share.error.private-reverse-share.title": "Pääsy evätty",
+  "share.error.private-reverse-share.description":
+    "Vain tämän käänteisen jaon luoja voi käyttää tätä jakoa",
   "share.modal.password.title": "Salasana vaaditaan",
   "share.modal.password.description": "Please enter the password to access this share.",
   "share.modal.password": "Salasana",

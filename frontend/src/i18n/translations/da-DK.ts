@@ -165,6 +165,7 @@ export default {
   "account.reverseShare.expires-on": "Denne omvendte deling udløber den {expiration}.",
   "account.reverseShares.table.no-shares": "Der er ikke oprettet nogle delinger endnu",
   "account.reverseShares.table.count.singular": "del",
+  "account.reverseShares.table.public-access": "Offentlig adgang",
   "account.reverseShares.table.count.plural": "shares",
   "account.reverseShares.table.shares": "Delinger",
   "account.reverseShares.table.remaining": "Resterende anvendelser",
@@ -278,6 +279,9 @@ export default {
   "share.error.not-found.description": "Den deling, du leder efter, eksisterer ikke.",
   "share.error.access-denied.title": "Privat deling",
   "share.error.access-denied.description": "The current account does not have permission to access this share",
+  "share.error.private-reverse-share.title": "Adgang nægtet",
+  "share.error.private-reverse-share.description":
+    "Kun opretteren af denne omvendte deling kan få adgang til denne deling",
   "share.modal.password.title": "Adgangskode påkrævet",
   "share.modal.password.description": "Please enter the password to access this share.",
   "share.modal.password": "Adgangskode",
