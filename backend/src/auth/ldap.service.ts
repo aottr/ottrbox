@@ -17,10 +17,12 @@ export class LdapService {
       throw new Error("LDAP server URL is not defined");
     }
 
+    const isSecure = ldapUrl.startsWith("ldaps://");
     const ldapClient = new Client({
       url: ldapUrl,
       timeout: 15_000,
       connectTimeout: 15_000,
+      tlsOptions: isSecure ? { minVersion: "TLSv1.2" } : undefined,
     });
 
     const bindDn = this.serviceConfig.get("ldap.bindDn") || null;
