@@ -155,6 +155,13 @@ export default {
   "account.reverseShares.modal.expiration.year-singular": "Jahr",
   "account.reverseShares.modal.expiration.year-plural": "Jahre",
   "account.reverseShares.modal.max-size.label": "Maximale Freigabegröße",
+
+  "account.reverseShares.modal.additional-options.title": "Zusätzliche Optionen",
+  "account.reverseShares.modal.name.label": "Name",
+  "account.reverseShares.modal.name.placeholder": "Name",
+  "account.reverseShares.modal.name.description":
+    "Optionaler Name für die externe Freigabe. Er wird für dich und die Person, die die Dateien hochlädt, sichtbar sein.",
+
   "account.reverseShares.modal.send-email": "E-Mail Benachrichtigungen senden",
   "account.reverseShares.modal.send-email.description": "Sendet eine E-Mail Benachrichtigung, wenn eine Datei auf Ihrer externen Freigabe hochgeladen wurde.",
   "account.reverseShares.modal.simplified": "Einfacher Modus",

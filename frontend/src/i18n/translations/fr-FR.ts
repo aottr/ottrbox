@@ -155,6 +155,13 @@ export default {
   "account.reverseShares.modal.expiration.year-singular": "An",
   "account.reverseShares.modal.expiration.year-plural": "Ans",
   "account.reverseShares.modal.max-size.label": "Taille maximale du partage",
+
+  "account.reverseShares.modal.additional-options.title": "Options supplémentaires",
+  "account.reverseShares.modal.name.label": "Nom",
+  "account.reverseShares.modal.name.placeholder": "Nom",
+  "account.reverseShares.modal.name.description":
+    "Nom optionnel pour le partage inversé. Il sera visible pour vous et la personne qui télécharge les fichiers.",
+
   "account.reverseShares.modal.send-email": "Envoyer des notifications par courriel",
   "account.reverseShares.modal.send-email.description": "Vous envoi une notification par courriel lorsqu'un partage est créé avec ce lien de partage inversé.",
   "account.reverseShares.modal.simplified": "Mode simple",

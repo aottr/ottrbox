@@ -1,4 +1,4 @@
-import { Button, Group } from "@mantine/core";
+import { Button, Group, Title } from "@mantine/core";
 import { useModals } from "@mantine/modals";
 import { cleanNotifications } from "@mantine/notifications";
 import { AxiosError } from "axios";
@@ -25,15 +25,19 @@ const promiseLimit = pLimit(3);
 let errorToastShown = false;
 let createdShare: Share;
 
+type UploadProps = {
+  maxShareSize?: number;
+  isReverseShare: boolean;
+  simplified: boolean;
+  name?: string;
+}
+
 const Upload = ({
   maxShareSize,
   isReverseShare = false,
   simplified,
-}: {
-  maxShareSize?: number;
-  isReverseShare: boolean;
-  simplified: boolean;
-}) => {
+  name,
+}: UploadProps) => {
   const modals = useModals();
   const router = useRouter();
   const t = useTranslate();
@@ -223,7 +227,10 @@ const Upload = ({
   return (
     <>
       <Meta title={t("upload.title")} />
-      <Group position="right" mb={20}>
+      <Group {...(name ? { position: "apart" } : { position: "right" })} mb={20}>
+        {name && (
+          <Title order={3}>{name}</Title>
+        )}
         <Button
           loading={isUploading}
           disabled={files.length <= 0}

@@ -3,6 +3,7 @@ import mime from "mime-types";
 import { FileUploadResponse } from "../types/File.type";
 
 import {
+  CreateReverseShare,
   CreateShare,
   MyReverseShare,
   MyShare,
@@ -113,22 +114,10 @@ const uploadFile = async (
 };
 
 const createReverseShare = async (
-  shareExpiration: string,
-  maxShareSize: number,
-  maxUseCount: number,
-  sendEmailNotification: boolean,
-  simplified: boolean,
-  publicAccess: boolean,
+  reverseShare: CreateReverseShare
 ) => {
   return (
-    await api.post("reverseShares", {
-      shareExpiration,
-      maxShareSize: maxShareSize.toString(),
-      maxUseCount,
-      sendEmailNotification,
-      simplified,
-      publicAccess,
-    })
+    await api.post("reverseShares", reverseShare)
   ).data;
 };
 

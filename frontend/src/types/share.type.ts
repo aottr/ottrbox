@@ -13,6 +13,7 @@ export type Share = {
 
 export type ReverseShare = {
   id: string;
+  name?: string;
   maxShareSize: string;
   shareExpiration: Date;
   token: string;
@@ -37,6 +38,16 @@ export type CreateShare = {
   security: ShareSecurity;
 };
 
+export type CreateReverseShare = {
+  name?: string;
+  shareExpiration: string;
+  maxShareSize: string;
+  maxUseCount: number;
+  sendEmailNotification: boolean;
+  simplified: boolean;
+  publicAccess: boolean;
+};
+
 export type ShareMetaData = {
   id: string;
   isZipReady: boolean;
@@ -50,6 +61,7 @@ export type MyShare = Omit<Share, "hasPassword"> & {
 
 export type MyReverseShare = {
   id: string;
+  name?: string;
   maxShareSize: string;
   shareExpiration: Date;
   remainingUses: number;

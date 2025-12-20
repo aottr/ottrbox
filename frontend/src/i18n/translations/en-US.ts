@@ -201,6 +201,12 @@ export default {
 
   "account.reverseShares.modal.max-size.label": "Max share size",
 
+  "account.reverseShares.modal.additional-options.title": "Additional options",
+  "account.reverseShares.modal.name.label": "Name",
+  "account.reverseShares.modal.name.placeholder": "Name",
+  "account.reverseShares.modal.name.description":
+    "Optional name for the reverse share. It will be visible to you and the person uploading the files.",
+
   "account.reverseShares.modal.send-email": "Send email notifications",
   "account.reverseShares.modal.send-email.description":
     "Sends you an email notification when a share is created with this reverse share link.",

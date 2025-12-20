@@ -155,6 +155,13 @@ export default {
   "account.reverseShares.modal.expiration.year-singular": "Año",
   "account.reverseShares.modal.expiration.year-plural": "Años",
   "account.reverseShares.modal.max-size.label": "Tamaño máximo del compartido",
+
+  "account.reverseShares.modal.additional-options.title": "Opciones adicionales",
+  "account.reverseShares.modal.name.label": "Nombre",
+  "account.reverseShares.modal.name.placeholder": "Nombre",
+  "account.reverseShares.modal.name.description":
+    "Nombre opcional para el enlace de compartición inverso. Será visible para ti y para la persona que suba los archivos.",
+
   "account.reverseShares.modal.send-email": "Enviar notificaciones por correo electrónico",
   "account.reverseShares.modal.send-email.description": "Te envía una notificación por correo electrónico cuando se crea un enlace compartido con este enlace de compartición inverso.",
   "account.reverseShares.modal.simplified": "Modo simple",

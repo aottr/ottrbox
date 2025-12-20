@@ -134,6 +134,9 @@ const MyShares = () => {
                   <FormattedMessage id="account.reverseShares.table.shares" />
                 </th>
                 <th>
+                  <FormattedMessage id="account.shares.table.name" />
+                </th>
+                <th>
                   <FormattedMessage id="account.reverseShares.table.public-access" />
                 </th>
                 <th>
@@ -215,6 +218,7 @@ const MyShares = () => {
                       </Accordion>
                     )}
                   </td>
+                  <td>{reverseShare.name}</td>
                   <td style={{ textAlign: "center" }}>{reverseShare.publicAccess ? (
                       <ThemeIcon color="green" variant="light"><TbWorldCheck size="1.2rem" /></ThemeIcon>
                     ) : (

@@ -155,6 +155,13 @@ export default {
   "account.reverseShares.modal.expiration.year-singular": "Jaar",
   "account.reverseShares.modal.expiration.year-plural": "Jaren",
   "account.reverseShares.modal.max-size.label": "Maximale share-grootte",
+
+  "account.reverseShares.modal.additional-options.title": "Aanvullende opties",
+  "account.reverseShares.modal.name.label": "Naam",
+  "account.reverseShares.modal.name.placeholder": "Naam",
+  "account.reverseShares.modal.name.description":
+    "Optionele naam voor de omgekeerde share. Deze zal zichtbaar zijn voor jou en de persoon die de bestanden uploadt.",
+
   "account.reverseShares.modal.send-email": "Send email notifications",
   "account.reverseShares.modal.send-email.description": "Sends you an email notification when a share is created with this reverse share link.",
   "account.reverseShares.modal.simplified": "Simple mode",

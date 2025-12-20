@@ -1,4 +1,5 @@
 import {
+  Accordion,
   Button,
   Col,
   Grid,
@@ -8,6 +9,7 @@ import {
   Stack,
   Switch,
   Text,
+  TextInput,
 } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import { useModals } from "@mantine/modals";
@@ -59,6 +61,7 @@ const Body = ({
 
   const form = useForm({
     initialValues: {
+      name: undefined,
       maxShareSize: 104857600,
       maxUseCount: 1,
       sendEmailNotification: false,
@@ -69,6 +72,11 @@ const Body = ({
     },
     validate: yupResolver(
       yup.object().shape({
+        name: yup
+          .string()
+          .transform((value) => value || undefined)
+          .min(3, t("common.error.too-short", { length: 3 }))
+          .max(30, t("common.error.too-long", { length: 30 })),
         maxUseCount: yup
           .number()
           .typeError(t("common.error.invalid-number"))
@@ -110,12 +118,11 @@ const Body = ({
 
     shareService
       .createReverseShare(
-        values.expiration_num + values.expiration_unit,
-        values.maxShareSize,
-        values.maxUseCount,
-        values.sendEmailNotification,
-        values.simplified,
-        values.publicAccess,
+        {
+          ...values,
+          shareExpiration: values.expiration_num + values.expiration_unit,
+          maxShareSize: values.maxShareSize.toString(),
+        }
       )
       .then(({ link }) => {
         modals.closeAll();
@@ -222,30 +229,6 @@ const Body = ({
             description={t("account.reverseShares.modal.max-use.description")}
             {...form.getInputProps("maxUseCount")}
           />
-          {showSendEmailNotificationOption && (
-            <Switch
-              mt="xs"
-              labelPosition="left"
-              label={t("account.reverseShares.modal.send-email")}
-              description={t(
-                "account.reverseShares.modal.send-email.description",
-              )}
-              {...form.getInputProps("sendEmailNotification", {
-                type: "checkbox",
-              })}
-            />
-          )}
-          <Switch
-            mt="xs"
-            labelPosition="left"
-            label={t("account.reverseShares.modal.simplified")}
-            description={t(
-              "account.reverseShares.modal.simplified.description",
-            )}
-            {...form.getInputProps("simplified", {
-              type: "checkbox",
-            })}
-          />
           <Switch
             mt="xs"
             labelPosition="left"
@@ -257,6 +240,52 @@ const Body = ({
               type: "checkbox",
             })}
           />
+          <Accordion>
+            <Accordion.Item value="description" sx={{ borderBottom: "none" }}>
+              <Accordion.Control>
+                <FormattedMessage id="account.reverseShares.modal.additional-options.title" />
+              </Accordion.Control>
+              <Accordion.Panel>
+                <Stack align="stretch">
+                  <TextInput
+                    variant="filled"
+                    placeholder={t(
+                      "account.reverseShares.modal.name.placeholder",
+                    )}
+                    label={t("account.reverseShares.modal.name.label")}
+                    description={t(
+                      "account.reverseShares.modal.name.description",
+                    )}
+                    {...form.getInputProps("name")}
+                  />
+                  {showSendEmailNotificationOption && (
+                    <Switch
+                      mt="xs"
+                      labelPosition="left"
+                      label={t("account.reverseShares.modal.send-email")}
+                      description={t(
+                        "account.reverseShares.modal.send-email.description",
+                      )}
+                      {...form.getInputProps("sendEmailNotification", {
+                        type: "checkbox",
+                      })}
+                    />
+                  )}
+                  <Switch
+                    mt="xs"
+                    labelPosition="left"
+                    label={t("account.reverseShares.modal.simplified")}
+                    description={t(
+                      "account.reverseShares.modal.simplified.description",
+                    )}
+                    {...form.getInputProps("simplified", {
+                      type: "checkbox",
+                    })}
+                  />
+                </Stack>
+              </Accordion.Panel>
+            </Accordion.Item>
+          </Accordion>
           <Button mt="md" type="submit">
             <FormattedMessage id="common.button.create" />
           </Button>

@@ -48,6 +48,7 @@ const Share = ({ reverseShareToken }: { reverseShareToken: string }) => {
   return (
     <Upload
       isReverseShare
+      name={reverseShare?.name}
       maxShareSize={parseInt(reverseShare?.maxShareSize || "0")}
       simplified={reverseShare?.simplified || false}
     />
