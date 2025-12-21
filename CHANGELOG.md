@@ -1,3 +1,16 @@
+## [1.15.0](https://github.com/aottr/ottrbox/compare/v1.14.2...v1.15.0) (2025-12-21)
+
+
+### Features
+
+* add experimental flag for config values ([17775c9](https://github.com/aottr/ottrbox/commit/17775c92007e9acbff80a8bb72a15f22f38ba9ea))
+* add setting to enable recipient retrieval ([2dd52e3](https://github.com/aottr/ottrbox/commit/2dd52e362bcd037729092df09e99f567db105864)), closes [#9](https://github.com/aottr/ottrbox/issues/9)
+* add support to retrieve past recipients ([3d5fdce](https://github.com/aottr/ottrbox/commit/3d5fdce986fe7af6574f3ec027ec71624eb8d6ff)), closes [#9](https://github.com/aottr/ottrbox/issues/9)
+* **admin:** opt-in allow admins to access all shares ([300ff10](https://github.com/aottr/ottrbox/commit/300ff10895b981352c16306712b7994b8b8db884)), closes [#16](https://github.com/aottr/ottrbox/issues/16)
+* **ldap:** set minimum tls version if ldaps ([f529093](https://github.com/aottr/ottrbox/commit/f52909399afa9fa1e1d23b3c52a2b5277e7c9e17)), closes [#24](https://github.com/aottr/ottrbox/issues/24)
+* **reverse-share:** add name field to reverse share ([cc88461](https://github.com/aottr/ottrbox/commit/cc8846150cb9221148888bc209cba50915c49fa2)), closes [#14](https://github.com/aottr/ottrbox/issues/14)
+* **reverse-share:** mark if reverse-share is private ([c9bb273](https://github.com/aottr/ottrbox/commit/c9bb27323dd64731c3c042874f017c4410e7813e)), closes [#21](https://github.com/aottr/ottrbox/issues/21)
+
 ## [1.14.2](https://github.com/aottr/ottrbox/compare/v1.14.0...v1.14.2) (2025-08-09)
 
 
