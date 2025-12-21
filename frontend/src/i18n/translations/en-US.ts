@@ -537,6 +537,10 @@ export default {
   "admin.config.share.auto-open-share-modal": "Auto open create share modal",
   "admin.config.share.auto-open-share-modal.description":
     "The share creation modal automatically appears when a user selects files, eliminating the need to manually click the button.",
+  "admin.config.share.allow-admin-access-all-shares":
+    "Allow admins to access all shares",
+  "admin.config.share.allow-admin-access-all-shares.description":
+    "When enabled, administrators can access all shares without requiring share tokens or passwords. This allows admins to view and download files from any share for management purposes.",
 
   "admin.config.smtp.enabled": "Enable",
   "admin.config.smtp.enabled.description":

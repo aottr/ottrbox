@@ -389,6 +389,10 @@ export default {
   "admin.config.share.chunk-size.description": "Passe die Chunk-Größe für deine Uploads an, um Effizienz und Zuverlässigkeit entsprechend deiner Internetverbindung auszubalancieren. Kleinere Chunks können die Erfolgsraten bei instabilen Verbindungen erhöhen, während größere Chunks Uploads bei stabilen Verbindungen beschleunigen.",
   "admin.config.share.auto-open-share-modal": "Freigabe-Fenster automatisch öffnen",
   "admin.config.share.auto-open-share-modal.description": "Das Freigabe-Fenster erscheint automatisch, sobald ein Benutzer Dateien ausgewählt hat, ohne extra auf den Button klicken zu müssen.",
+  "admin.config.share.allow-admin-access-all-shares":
+    "Administratoren Zugriff auf alle Freigaben erlauben",
+  "admin.config.share.allow-admin-access-all-shares.description":
+    "Wenn aktiviert, können Administratoren auf alle Freigaben zugreifen, ohne Freigabe-Token oder Passwörter zu benötigen. Dies ermöglicht Administratoren, Dateien von jeder Freigabe für Verwaltungszwecke anzuzeigen und herunterzuladen.",
   "admin.config.smtp.enabled": "Aktivieren",
   "admin.config.smtp.enabled.description": "Gibt an, ob SMTP aktiviert ist. Aktiviere dies nur, wenn du den Host, den Port, die E-Mail, den Benutzernamen und das Passwort deines SMTP-Servers eingegeben hast.",
   "admin.config.smtp.host": "Host",

@@ -389,7 +389,11 @@ export default {
   "admin.config.share.chunk-size": "Taille des tronçons",
   "admin.config.share.chunk-size.description": "Ajustez la taille des tronçons pour que vos téléchargements équilibrent efficacité et fiabilité en fonction de votre connexion Internet. Les petits tronçons peuvent améliorer les taux de succès sur les connexions instables, tandis que les tronçons plus importants accélèrent les téléchargements sur les connexions stables.",
   "admin.config.share.auto-open-share-modal": "Ouvrir automatiquement la modale de partage",
-  "admin.config.share.auto-open-share-modal.description": "La modale de création de partage apparaît automatiquement lorsqu’un utilisateur sélectionne des fichiers, ce qui élimine le besoin de cliquer manuellement sur le bouton.",
+  "admin.config.share.auto-open-share-modal.description": "La modale de création de partage apparaît automatiquement lorsqu'un utilisateur sélectionne des fichiers, ce qui élimine le besoin de cliquer manuellement sur le bouton.",
+  "admin.config.share.allow-admin-access-all-shares":
+    "Autoriser les administrateurs à accéder à tous les partages",
+  "admin.config.share.allow-admin-access-all-shares.description":
+    "Lorsqu'elle est activée, les administrateurs peuvent accéder à tous les partages sans nécessiter de jetons de partage ou de mots de passe. Cela permet aux administrateurs de visualiser et télécharger des fichiers depuis n'importe quel partage à des fins de gestion.",
   "admin.config.smtp.enabled": "Activer",
   "admin.config.smtp.enabled.description": "Active SMTP. Activez ceci uniquement si vous avez saisi l’hôte, le port, le courriel, l’utilisateur et son mot de passe, de votre serveur SMTP.",
   "admin.config.smtp.host": "Hôte",

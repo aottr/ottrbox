@@ -389,6 +389,10 @@ export default {
   "admin.config.share.chunk-size.description": "Ajusta el tamaño del fragmento para tus subidas y equilibra la eficiencia y la fiabilidad según tu conexión a Internet. Fragmentos más pequeños pueden aumentar las tasas de éxito para conexiones inestables, mientras que fragmentos más grandes hacen que las subidas sean más rápidas para conexiones estables.",
   "admin.config.share.auto-open-share-modal": "Auto abrir un modal de creación de compartidos",
   "admin.config.share.auto-open-share-modal.description": "El modal de creación de compartir aparece automáticamente cuando un usuario selecciona archivos, eliminando la necesidad de hacer clic manualmente en el botón.",
+  "admin.config.share.allow-admin-access-all-shares":
+    "Permitir que los administradores accedan a todos los compartidos",
+  "admin.config.share.allow-admin-access-all-shares.description":
+    "Cuando está habilitado, los administradores pueden acceder a todos los compartidos sin requerir tokens de compartido o contraseñas. Esto permite a los administradores ver y descargar archivos de cualquier compartido con fines de gestión.",
   "admin.config.smtp.enabled": "Habilitar",
   "admin.config.smtp.enabled.description": "Si SMTP está habilitado. Active solo si ha introducido el host, el puerto, el correo, el usuario y la contraseña de su servidor SMTP.",
   "admin.config.smtp.host": "Host",

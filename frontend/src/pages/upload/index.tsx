@@ -56,7 +56,8 @@ const Upload = ({
 
   const enableRecipientRetrieval = !isReverseShare
     && config.get("email.enableShareEmailRecipients")
-    && config.get("email.enableShareEmailPastRecipients");
+    && config.get("email.enableShareEmailPastRecipients")
+    && !!user;
 
   const { data: pastRecipients } = useQuery({
     queryKey: ["share.pastRecipients"],

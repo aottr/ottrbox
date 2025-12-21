@@ -7,6 +7,10 @@ export class JwtGuard extends AuthGuard("jwt") {
   constructor(private config: ConfigService) {
     super();
   }
+  /**
+   * If the user is not authenticated and allowUnauthenticatedShares is true, return true
+   * Otherwise, return false
+   */
   async canActivate(context: ExecutionContext): Promise<boolean> {
     try {
       return (await super.canActivate(context)) as boolean;

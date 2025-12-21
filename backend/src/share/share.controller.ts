@@ -54,6 +54,7 @@ export class ShareController {
   @Get("recipients")
   @UseGuards(JwtGuard)
   async getStoredRecipients(@GetUser() user: User) {
+    if (!user) return []; // fallback for unauthenticated users
     return await this.shareService.getStoredRecipientsByUser(user.id);
   }
 
