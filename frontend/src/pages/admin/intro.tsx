@@ -27,18 +27,10 @@ const Intro = () => {
             If you enjoy OttrBox please ⭐️ it on{" "}
             <Anchor
               target="_blank"
-              href="https://github.com/aottr/ottrbox"
+              href="https://github.com/dinip/ottrbox"
             >
               GitHub
             </Anchor>{" "}
-            or{" "}
-            <Anchor
-              target="_blank"
-              href="https://github.com/sponsors/aottr"
-            >
-              buy me a coffee
-            </Anchor>{" "}
-            if you want to support my work.
           </Text>
           <Text>Enough talked, have fun with OttrBox!</Text>
           <Text mt="lg">How to you want to continue?</Text>

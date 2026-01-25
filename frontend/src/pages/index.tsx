@@ -166,7 +166,7 @@ export default function Home() {
               </Button>
               <Button
                 component={Link}
-                href="https://github.com/aottr/ottrbox"
+                href="https://github.com/dinip/ottrbox"
                 target="_blank"
                 variant="default"
                 radius="xl"

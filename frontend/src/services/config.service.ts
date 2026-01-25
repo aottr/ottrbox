@@ -46,7 +46,7 @@ const isNewReleaseAvailable = async () => {
   try {
     const response = (
       await axios.get(
-        "https://api.github.com/repos/aottr/ottrbox/releases/latest",
+        "https://api.github.com/repos/dinip/ottrbox/releases/latest",
       )
     ).data;
     return response.tag_name.replace("v", "") != process.env.VERSION;

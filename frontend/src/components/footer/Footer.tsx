@@ -31,7 +31,7 @@ const Footer = () => {
           Powered by{" "}
           <Anchor
             size="xs"
-            href="https://github.com/aottr/ottrbox"
+            href="https://github.com/dinip/ottrbox"
             target="_blank"
           >
             OttrBox

@@ -1,9 +1,4 @@
 # <div align="center"> </br>OttrBox</div>
-<!-- <img  src="https://user-images.githubusercontent.com/58886915/166198400-c2134044-1198-4647-a8b6-da9c4a204c68.svg" width="40"/> -->
-
-[![](https://dcbadge.limes.pink/api/server/hupa2vnUEu)](https://discord.gg/hupa2vnUEu) [![](https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=#white)](https://github.com/sponsors/aottr)
-
----
 
 OttrBox is a self-hosted file sharing platform and an alternative for WeTransfer.
 

@@ -64,7 +64,7 @@ const Admin = () => {
               title: "Update",
               icon: TbRefresh,
               route:
-                "https://github.com/aottr/ottrbox/releases/latest",
+                "https://github.com/dinip/ottrbox/releases/latest",
             },
           ]);
         }

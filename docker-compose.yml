@@ -1,6 +1,6 @@
 services:
   ottrbox:
-    image: ghcr.io/aottr/ottrbox
+    image: ghcr.io/dinip/ottrbox
     restart: unless-stopped
     ports:
       - 3000:3000
