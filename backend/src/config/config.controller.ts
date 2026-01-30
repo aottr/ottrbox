@@ -22,8 +22,10 @@ import { ConfigDTO } from "./dto/config.dto";
 import { TestEmailDTO } from "./dto/testEmail.dto";
 import UpdateConfigDTO from "./dto/updateConfig.dto";
 import { LogoService } from "./logo.service";
+import { NoCacheInterceptor } from "./interceptor/no-cache.interceptor";
 
 @Controller("configs")
+@UseInterceptors(NoCacheInterceptor)
 export class ConfigController {
   constructor(
     private configService: ConfigService,
