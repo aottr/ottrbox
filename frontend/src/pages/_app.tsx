@@ -131,46 +131,46 @@ function App({ Component, pageProps }: AppProps) {
               >
                 <GlobalStyle />
                 <Notifications />
-                <ModalsProvider>
-                  <ConfigContext.Provider
+                <ConfigContext.Provider
+                  value={{
+                    configVariables,
+                    refresh: async () => {
+                      setConfigVariables(await configService.list());
+                    },
+                  }}
+                >
+                  <ModalsProvider>
+                  <UserContext.Provider
                     value={{
-                      configVariables,
-                      refresh: async () => {
-                        setConfigVariables(await configService.list());
+                      user,
+                      refreshUser: async () => {
+                        const user = await userService.getCurrentUser();
+                        setUser(user);
+                        return user;
                       },
                     }}
                   >
-                    <UserContext.Provider
-                      value={{
-                        user,
-                        refreshUser: async () => {
-                          const user = await userService.getCurrentUser();
-                          setUser(user);
-                          return user;
-                        },
-                      }}
-                    >
-                      {excludeDefaultLayoutRoutes.includes(route) ? (
-                        <Component {...pageProps} />
-                      ) : (
-                        <>
-                          <Stack
-                            justify="space-between"
-                            sx={{ minHeight: "100vh" }}
-                          >
-                            <div>
-                              <Header />
-                              <Container>
-                                <Component {...pageProps} />
-                              </Container>
-                            </div>
-                            <Footer />
-                          </Stack>
-                        </>
-                      )}
-                    </UserContext.Provider>
-                  </ConfigContext.Provider>
-                </ModalsProvider>
+                    {excludeDefaultLayoutRoutes.includes(route) ? (
+                      <Component {...pageProps} />
+                    ) : (
+                      <>
+                        <Stack
+                          justify="space-between"
+                          sx={{ minHeight: "100vh" }}
+                        >
+                          <div>
+                            <Header />
+                            <Container>
+                              <Component {...pageProps} />
+                            </Container>
+                          </div>
+                          <Footer />
+                        </Stack>
+                      </>
+                    )}
+                  </UserContext.Provider>
+                  </ModalsProvider>
+                </ConfigContext.Provider>
               </ColorSchemeProvider>
             </MantineProvider>
           </IntlProvider>

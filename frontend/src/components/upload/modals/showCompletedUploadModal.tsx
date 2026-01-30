@@ -9,6 +9,7 @@ import useTranslate, {
 } from "../../../hooks/useTranslate.hook";
 import { CompletedShare } from "../../../types/share.type";
 import CopyTextField from "../CopyTextField";
+import useConfig from "../../../hooks/config.hook";
 
 const showCompletedUploadModal = (
   modals: ModalsContextProps,
@@ -31,7 +32,8 @@ const Body = ({ share }: { share: CompletedShare }) => {
 
   const isReverseShare = !!router.query["reverseShareToken"];
 
-  const link = `${window.location.origin}/s/${share.id}`;
+  const config = useConfig();
+  const link = `${config.get("general.appUrl")}/s/${share.id}`;
 
   return (
     <Stack align="stretch">

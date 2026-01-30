@@ -180,7 +180,7 @@ const MyShares = () => {
                             {reverseShare.shares.map((share) => (
                               <Group key={share.id} mb={4} spacing="xs">
                                 <Anchor
-                                  href={`${window.location.origin}/share/${share.id}`}
+                                  href={`${config.get("general.appUrl")}/share/${share.id}`}
                                   target="_blank"
                                 >
                                   <Text maw={120} truncate>
@@ -199,7 +199,7 @@ const MyShares = () => {
                                   onClick={() => {
                                     if (window.isSecureContext) {
                                       clipboard.copy(
-                                        `${window.location.origin}/s/${share.id}`,
+                                        `${config.get("general.appUrl")}/s/${share.id}`,
                                       );
                                       toast.success(
                                         t("common.notify.copied-link"),
@@ -243,7 +243,7 @@ const MyShares = () => {
                         onClick={() => {
                           if (window.isSecureContext) {
                             clipboard.copy(
-                              `${window.location.origin}/upload/${reverseShare.token}`,
+                              `${config.get("general.appUrl")}/upload/${reverseShare.token}`,
                             );
                             toast.success(t("common.notify.copied-link"));
                           } else {

@@ -32,6 +32,7 @@ import { CreateShare } from "../../../types/share.type";
 import { getExpirationPreview } from "../../../utils/date.util";
 import toast from "../../../utils/toast.util";
 import { Timespan } from "../../../types/timespan.type";
+import useConfig from "../../../hooks/config.hook";
 
 const showCreateUploadModal = (
   modals: ModalsContextProps,
@@ -122,6 +123,7 @@ const CreateUploadModalBody = ({
   pastRecipients?: string[];
 }) => {
   const modals = useModals();
+  const config = useConfig();
   const t = useTranslate();
 
   const generatedLink = generateShareId(options.shareIdLength);
@@ -270,7 +272,7 @@ const CreateUploadModalBody = ({
               color: theme.colors.gray[6],
             })}
           >
-            {`${window.location.origin}/s/${form.values.link}`}
+            {`${config.get("general.appUrl")}/s/${form.values.link}`}
           </Text>
           {!options.isReverseShare && (
             <>

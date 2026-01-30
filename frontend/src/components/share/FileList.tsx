@@ -20,6 +20,7 @@ import { byteToHumanSizeString } from "../../utils/fileSize.util";
 import toast from "../../utils/toast.util";
 import TableSortIcon, { TableSort } from "../core/SortIcon";
 import showFilePreviewModal from "./modals/showFilePreviewModal";
+import useConfig from "../../hooks/config.hook";
 
 const FileList = ({
   files,
@@ -33,6 +34,7 @@ const FileList = ({
   const clipboard = useClipboard();
   const modals = useModals();
   const t = useTranslate();
+  const config = useConfig();
 
   const [sort, setSort] = useState<TableSort>({
     property: "name",
@@ -58,7 +60,7 @@ const FileList = ({
 
   const copyFileLink = (file: FileMetaData) => {
 
-    const link = `${window.location.origin}/api/shares/${share!.id
+    const link = `${config.get("general.appUrl")}/api/shares/${share!.id
       }/files/${file.id}`;
 
     if (window.isSecureContext) {

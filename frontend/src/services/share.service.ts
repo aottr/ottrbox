@@ -83,7 +83,7 @@ const doesFileSupportPreview = (fileName: string) => {
 };
 
 const downloadFile = async (shareId: string, fileId: string) => {
-  window.location.href = `${window.location.origin}/api/shares/${shareId}/files/${fileId}`;
+  window.location.href = `/api/shares/${shareId}/files/${fileId}`;
 };
 
 const removeFile = async (shareId: string, fileId: string) => {
